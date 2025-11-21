@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Abdu Salim - Web Developer Portfolio</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="index.css">
+  <style>
+    :root {
+      --primary: #3498db;
+      --primary-dark: #2980b9;
+      --secondary: #2c3e50;
+      --light: #f4f7f6;
+      --dark: #333;
+      --white: #ffffff;
+      --shadow: 0 5px 15px rgba(0,0,0,0.1);
+      --transition: all 0.3s ease;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      line-height: 1.6;
+      color: var(--dark);
+      background-color: var(--white);
+      overflow-x: hidden;
+    }
+
+    ul { list-style: none; }
+    a { text-decoration: none; }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .section { padding: 80px 0; }
+    .bg-light { background-color: var(--light); }
+    .bg-dark { background-color: var(--secondary); color: var(--white); }
+    
+    .text-center { text-align: center; }
+    .mt-4 { margin-top: 2rem; }
+
+    .section-title {
+      text-align: center;
+      font-size: 2.5rem;
+      margin-bottom: 60px;
+      position: relative;
+      color: var(--secondary);
+    }
+    
+    .section-title::after {
+      content: '';
+      display: block;
+      width: 60px;
+      height: 4px;
+      background: var(--primary);
+      margin: 10px auto 0;
+      border-radius: 2px;
+    }
+    
+ 
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s ease;
+    }
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .btn {
+      display: inline-block;
+      background: var(--primary);
+      color: var(--white);
+      padding: 12px 30px;
+      border-radius: 50px;
+      font-weight: 600;
+      transition: var(--transition);
+      border: 2px solid var(--primary);
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      background: transparent;
+      color: var(--primary);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--primary);
+      border: 2px solid var(--primary);
+    }
+
+    .btn-outline:hover {
+      background: var(--primary);
+      color: var(--white);
+    }
+
+    .btn-sm { padding: 8px 20px; font-size: 0.9rem; }
+    .btn-block { width: 100%; display: block; text-align: center; }
+
+    header {
+      background: var(--white);
+      box-shadow: var(--shadow);
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 80px;
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--secondary);
+    }
+    .logo span { color: var(--primary); }
+
+    .nav-links { display: flex; gap: 20px; }
+    
+    .nav-links a {
+      color: var(--secondary);
+      font-weight: 500;
+      transition: var(--transition);
+      position: relative;
+    }
+
+    .nav-links a:hover, .nav-links a.active-link { color: var(--primary); }
+
+    .auth-links { display: flex; gap: 10px; align-items: center; }
+    
+   
+    .lang-btn {
+        background: var(--secondary);
+        color: white;
+        border: none;
+        padding: 5px 15px;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        cursor: pointer;
+        margin-left: 10px;
+    }
+    .lang-btn:hover { background: var(--primary); }
+
+    .hamburger { display: none; cursor: pointer; font-size: 1.5rem; color: var(--secondary); }
+
+    .hero {
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      padding-top: 80px;
+    }
+
+    .hero-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .hero-content h1 {
+      font-size: 3.5rem;
+      line-height: 1.2;
+      margin-bottom: 20px;
+      color: var(--secondary);
+    }
+
+    .hero-content h1 span { color: var(--primary); }
+    .hero-subtitle { font-size: 1.5rem; color: #666; margin-bottom: 20px; }
+    .hero-description { margin-bottom: 30px; max-width: 500px; }
+
+    .hero-img-wrapper {
+      position: relative;
+      text-align: center;
+    }
+
+    .hero-img-wrapper img {
+      width: 100%;
+      max-width: 450px;
+      border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; 
+      box-shadow: var(--shadow);
+      animation: morph 5s ease-in-out infinite;
+    }
+
+    @keyframes morph {
+      0% { border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; }
+      50% { border-radius: 70% 30% 30% 70% / 70% 70% 30% 30%; }
+      100% { border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; }
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+    }
+
+    .card {
+      background: var(--white);
+      padding: 40px 30px;
+      border-radius: 10px;
+      box-shadow: var(--shadow);
+      text-align: center;
+      transition: var(--transition);
+    }
+
+    .card:hover { transform: translateY(-10px); }
+    .card i { color: var(--primary); margin-bottom: 20px; }
+    .card h3 { margin-bottom: 15px; color: var(--secondary); }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 50px;
+      align-items: center;
+    }
+
+    .skill-item { margin-bottom: 20px; }
+    .skill-header { display: flex; justify-content: space-between; margin-bottom: 5px; font-weight: 600; }
+    .skill-bar { height: 10px; background: #ddd; border-radius: 5px; overflow: hidden; }
+    .skill-fill { height: 100%; background: var(--primary); border-radius: 5px; width: 0; transition: width 1.5s ease-in-out; }
+
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+    }
+
+    .portfolio-item {
+      position: relative;
+      overflow: hidden;
+      border-radius: 10px;
+      box-shadow: var(--shadow);
+    }
+
+    .portfolio-item img {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+      transition: var(--transition);
+      display: block;
+    }
+
+    .portfolio-overlay {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(52, 152, 219, 0.9);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      transition: var(--transition);
+      color: white;
+    }
+
+    .portfolio-item:hover img { transform: scale(1.1); }
+    .portfolio-item:hover .portfolio-overlay { opacity: 1; }
+
+    
+    .form-wrapper {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    
+    .input-group { margin-bottom: 20px; }
+    
+    .input-group input, .input-group textarea {
+      width: 100%;
+      padding: 15px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      font-family: inherit;
+      transition: var(--transition);
+    }
+
+    .input-group input:focus, .input-group textarea:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 5px rgba(52, 152, 219, 0.3);
+    }
+
+    .auth-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 40px;
+    }
+
+    .bg-dark .card { color: var(--secondary); } 
+
+    footer {
+      background: #1a252f;
+      color: #fff;
+      padding: 30px 0;
+      text-align: center;
+    }
+    
+    html[dir="rtl"] .hero-content { text-align: right; }
+    html[dir="rtl"] .skills-left { text-align: right; }
+    html[dir="rtl"] .lang-btn { margin-right: 10px; margin-left: 0; }
+    html[dir="rtl"] .nav-links { padding-right: 0; }
+
+    @media (max-width: 768px) {
+      .hero-content h1 { font-size: 2.5rem; }
+      .hero-container, .skills-grid { grid-template-columns: 1fr; text-align: center; }
+      html[dir="rtl"] .hero-content { text-align: center; }
+      html[dir="rtl"] .skills-left { text-align: center; }
+
+      .hero-btns { justify-content: center; display: flex; gap: 10px; }
+      
+      .hamburger { display: block; z-index: 1001; }
+      .nav-links {
+        position: fixed;
+        top: 0; right: -100%;
+        width: 70%;
+        height: 100vh;
+        background: var(--white);
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+        transition: var(--transition);
+        z-index: 1000;
+      }
+      html[dir="rtl"] .nav-links { right: auto; left: -100%; }
+      html[dir="rtl"] .nav-links.nav-active { left: 0; }
+      html[dir="ltr"] .nav-links.nav-active { right: 0; }
+
+      .auth-links { display: none; } 
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <nav class="navbar container">
+      <div class="logo">Abdu<span>Salim.</span></div>
+      
+      <ul class="nav-links">
+        <li><a href="#home" class="nav-item" data-i18n="home">Home</a></li>
+        <li><a href="#services" class="nav-item" data-i18n="services">Services</a></li>
+        <li><a href="#skills" class="nav-item" data-i18n="skills">Skills</a></li>
+        <li><a href="#portfolio" class="nav-item" data-i18n="portfolio">Portfolio</a></li>
+        <li><a href="#contact" class="nav-item" data-i18n="contact">Contact</a></li>
+      </ul>
+
+      <div class="auth-links">
+        <a href="#signup" class="btn btn-sm" data-i18n="signup">Sign Up</a>
+        <a href="#login" class="btn btn-sm btn-outline" data-i18n="login">Log In</a>
+        <button class="lang-btn" onclick="toggleLanguage()">عربي ,/, EN</button>
+      </div>
+
+      <div class="hamburger">
+        <i class="fas fa-bars"></i>
+      </div>
+    </nav>
+  </header>
+
+  <section id="home" class="hero">
+    <div class="container hero-container">
+      <div class="hero-content reveal">
+        <p class="hero-subtitle" data-i18n="role">Web Developer | UI/UX Designer</p>
+        <h1 data-i18n="greeting">Building Digital <br><span>Experiences</span></h1>
+        <p class="hero-description" data-i18n="heroDesc">
+          I am a passionate developer specializing in HTML, CSS, and JavaScript. I turn coffee into code and ideas into reality.
+        </p>
+        <div class="hero-btns">
+          <a href="#contact" class="btn" data-i18n="hireMe">Hire Me</a>
+          <a href="#portfolio" class="btn btn-outline" data-i18n="myWork">My Work</a>
+        </div>
+        <div class="mt-4 social-hero">
+          <a href="#" style="font-size: 1.5rem; margin-right: 15px; color:var(--secondary)"><i class="fab fa-github"></i></a>
+          <a href="#" style="font-size: 1.5rem; margin-right: 15px; color:var(--secondary)"><i class="fab fa-linkedin"></i></a>
+          <a href="#" style="font-size: 1.5rem; color:var(--secondary)"><i class="fab fa-twitter"></i></a>
+        </div>
+      </div>
+      <div class="hero-img-wrapper reveal">
+        <img src="https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Abdu Salim">
+      </div>
+    </div>
+  </section>
+
+  <section id="services" class="section bg-light">
+    <div class="container">
+      <h2 class="section-title reveal" data-i18n="servicesTitle">My Services</h2>
+      <div class="grid-3">
+        <div class="card reveal">
+          <i class="fas fa-code fa-3x"></i>
+          <h3 data-i18n="serv1Title">Web Development</h3>
+          <p data-i18n="serv1Desc">Responsive websites built with semantic HTML, modern CSS, and vanilla JavaScript.</p>
+        </div>
+        <div class="card reveal">
+          <i class="fas fa-paint-brush fa-3x"></i>
+          <h3 data-i18n="serv2Title">UI/UX Design</h3>
+          <p data-i18n="serv2Desc">Creating clean, user-friendly interfaces that look great on all devices.</p>
+        </div>
+        <div class="card reveal">
+          <i class="fas fa-rocket fa-3x"></i>
+          <h3 data-i18n="serv3Title">Optimization</h3>
+          <p data-i18n="serv3Desc">Speeding up websites and ensuring SEO best practices are followed.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills" class="section">
+    <div class="container">
+      <h2 class="section-title reveal" data-i18n="skillsTitle">My Skills</h2>
+      <div class="skills-grid">
+        <div class="skills-left reveal">
+            <h3 style="margin-bottom:20px;" data-i18n="techExpTitle">Technical Expertise</h3>
+            <p style="margin-bottom:20px;" data-i18n="techExpDesc">I have been working with web technologies for 4 years. I constantly update my skills to match the latest industry trends.</p>
+            <img src="https://placehold.co/500x300/3498db/FFF?text=Coding+Setup" alt="Coding" style="width:100%; border-radius:10px;">
+        </div>
+        <div class="skills-right reveal">
+          
+          <div class="skill-item">
+            <div class="skill-header">
+              <span>HTML5</span>
+              <span>95%</span>
+            </div>
+            <div class="skill-bar"><div class="skill-fill" data-width="95%"></div></div>
+          </div>
+
+          <div class="skill-item">
+            <div class="skill-header">
+              <span>CSS3 & Flexbox/Grid</span>
+              <span>90%</span>
+            </div>
+            <div class="skill-bar"><div class="skill-fill" data-width="90%"></div></div>
+          </div>
+
+          <div class="skill-item">
+            <div class="skill-header">
+              <span>JavaScript</span>
+              <span>85%</span>
+            </div>
+            <div class="skill-bar"><div class="skill-fill" data-width="85%"></div></div>
+          </div>
+
+          <div class="skill-item">
+            <div class="skill-header">
+              <span>Git & GitHub</span>
+              <span>80%</span>
+            </div>
+            <div class="skill-bar"><div class="skill-fill" data-width="80%"></div></div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="portfolio" class="section bg-light">
+    <div class="container">
+      <h2 class="section-title reveal" data-i18n="recentWork">Recent Work</h2>
+      <div class="portfolio-grid">
+        <div class="portfolio-item reveal">
+          <img src="https://placehold.co/400x300/2c3e50/FFF?text=E-Commerce" alt="Project 1">
+          <div class="portfolio-overlay">
+            <h3 data-i18n="proj1">E-Commerce Site</h3>
+            <p>HTML, CSS, JS</p>
+            <a href="https://www.udemy.com/topic/javascript/?utm_source=adwords&utm_medium=udemyads&utm_campaign=Search_Keyword_Alpha_Prof_la.ES_cc.ROW-Spanish&campaigntype=Search&portfolio=ROW-Spanish&language=ES&product=Course&test=&audience=Keyword&topic=JavaScript&priority=Alpha&utm_content=deal4584&utm_term=_._ag_160294399850_._ad_775604062686_._kw_curso%20html%20css%20y%20javascript_._de_c_._dm__._pl__._ti_kwd-325725089442_._li_9070450_._pd__._&matchtype=b&gad_source=1&gad_campaignid=21487757262&gbraid=0AAAAADROdO3xtzk1WAdccD0RAKqYDB6Uw&gclid=CjwKCAiAuIDJBhBoEiwAxhgyFqfznLXW0IlTsfKv9m0IzVD6SLd71cXrhl74yrEPy_AO6QfI117sSxoCfxsQAvD_BwE" class="btn btn-sm btn-outline" style="margin-top:10px; color:white; border-color:white;" data-i18n="viewBtn">View</a>
+          </div>
+        </div>
+        <div class="portfolio-item reveal">
+          <img src="https://placehold.co/400x300/e74c3c/FFF?text=Dashboard" alt="Project 2">
+          <div class="portfolio-overlay">
+            <h3 data-i18n="proj2">Admin Dashboard</h3>
+            <p>Grid Layout & Charts</p>
+            <a href="https://www.wix.com/lp-en/sl/ecom?utm_source=google&utm_medium=cpc&utm_campaign=21928732450^173751498914^search%20-%20dsa&experiment_id=^^721965827403^&gad_source=1&gad_campaignid=21928732450&gbraid=0AAAAADwEfwWfM95KSKELZ6rwVdMVpbP5n&gclid=CjwKCAiAuIDJBhBoEiwAxhgyFlHmRXp5yiZX9Rd301rVRkUrgDzO0cRPhu8zaGU509AXCAU0c-9QyhoCuegQAvD_BwE" class="btn btn-sm btn-outline" style="margin-top:10px; color:white; border-color:white;" data-i18n="viewBtn">View</a>
+          </div>
+        </div>
+        <div class="portfolio-item reveal">
+          <img src="https://placehold.co/400x300/27ae60/FFF?text=Travel+App" alt="Project 3">
+          <div class="portfolio-overlay">
+            <h3 data-i18n="proj3">Travel Agency</h3>
+            <p>Landing Page</p>
+            <a href="https://www.booking.com/searchresults.en.html?aid=311984&label=slbn_-Rzl8m7vzJhYr6rL9%2A3HS9QS626019398824%3Apl%3Ata%3Ap1%3Ap2%3Aac%3Aap%3Aneg%3Afi%3Atikwd-686882255%3Alp9070450%3Ali%3Adec%3Adm%3Appccp%3DUmFuZG9tSVYkc2RlIyh9YbSsBl3MCvHsD8UKUHIRFxY&sid=b795850c459c0d1b643ee6413123452d&dest_id=4263223&dest_type=hotel&;gad_campaignid=8471304869;gclid=CjwKCAiAuIDJBhBoEiwAxhgyFpgxKgbWP-A-BCF2xSfqbX1Vc02mt2sdCPaN_IdABKcwWYWeu0A6-BoC9J8QAvD_BwE;gad_source=1;gbraid=0AAAAAD_Ls1K05eokSEvsmn_PzjOs8LRkG" class="btn btn-sm btn-outline" style="margin-top:10px; color:white; border-color:white;" data-i18n="viewBtn">View</a>
+          </div>
+        </div>
+      </div>
+      <div class="text-center mt-4 reveal">
+        <a href="https://github.com/ABDUSALIMSUBAHIELBASHI?tab=repositories" target="_blank" class="btn btn-outline" data-i18n="viewGithub">View All on GitHub</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="section">
+    <div class="container form-wrapper">
+      <h2 class="section-title reveal" data-i18n="contactTitle">Get In Touch</h2>
+      <form id="contactForm" class="card reveal">
+        <div class="input-group">
+          <label data-i18n="formName">Name</label>
+          <input type="text" id="name" required placeholder="John Doe">
+        </div>
+        <div class="input-group">
+          <label data-i18n="formEmail">Email</label>
+          <input type="email" id="email" required placeholder="john@example.com">
+        </div>
+        <div class="input-group">
+          <label data-i18n="formMessage">Message</label>
+          <textarea id="message" rows="5" required placeholder="How can I help you?"></textarea>
+        </div>
+        <button type="submit" class="btn btn-block" data-i18n="sendBtn">Send Message</button>
+      </form>
+    </div>
+  </section>
+
+  <section id="auth" class="section bg-dark">
+    <div class="container">
+      <h2 class="section-title" style="color:white;" data-i18n="joinComm">Join the Community</h2>
+      <div class="auth-grid">
+        
+        <div id="login" class="card reveal">
+          <h3 data-i18n="login">Log In</h3>
+          <p style="margin-bottom:20px;" data-i18n="welcomeBack">Welcome back, developer.</p>
+          <form onsubmit="event.preventDefault(); alert('Login Logic Here');">
+            <div class="input-group">
+              <input type="email" placeholder="Email" required>
+            </div>
+            <div class="input-group">
+              <input type="password" placeholder="Password" required>
+            </div>
+            <button class="btn btn-block" data-i18n="login">Log In</button>
+          </form>
+        </div>
+
+        <div id="signup" class="card reveal">
+          <h3 data-i18n="signup">Sign Up</h3>
+          <p style="margin-bottom:20px;" data-i18n="createAcc">Create an account today.</p>
+          <form onsubmit="event.preventDefault(); alert('Signup Logic Here');">
+            <div class="input-group">
+              <input type="text" placeholder="Full Name" required>
+            </div>
+            <div class="input-group">
+              <input type="email" placeholder="Email" required>
+            </div>
+            <div class="input-group">
+              <input type="password" placeholder="Create Password" required>
+            </div>
+            <button class="btn btn-outline btn-block" data-i18n="signup">Sign Up</button>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2023 Abdu Salim. All rights reserved.</p>
+      <p style="font-size:0.8rem; margin-top:10px; opacity:0.7;">Designed with HTML, CSS, & JS</p>
+    </div>
+  </footer>
+
+  <script>
+    const translations = {
+      en: {
+        home: "Home",
+        services: "Services",
+        skills: "Skills",
+        portfolio: "Portfolio",
+        contact: "Contact",
+        signup: "Sign Up",
+        login: "Log In",
+        role: "Web Developer | UI/UX Designer",
+        greeting: "Building Digital <br><span>Experiences</span>",
+        heroDesc: "I am a passionate developer specializing in HTML, CSS, and JavaScript. I turn coffee into code and ideas into reality.",
+        hireMe: "Hire Me",
+        myWork: "My Work",
+        servicesTitle: "My Services",
+        serv1Title: "Web Development",
+        serv1Desc: "Responsive websites built with semantic HTML, modern CSS, and vanilla JavaScript.",
+        serv2Title: "UI/UX Design",
+        serv2Desc: "Creating clean, user-friendly interfaces that look great on all devices.",
+        serv3Title: "Optimization",
+        serv3Desc: "Speeding up websites and ensuring SEO best practices are followed.",
+        skillsTitle: "My Skills",
+        techExpTitle: "Technical Expertise",
+        techExpDesc: "I have been working with web technologies for 4 years. I constantly update my skills to match the latest industry trends.",
+        recentWork: "Recent Work",
+        proj1: "E-Commerce Site",
+        proj2: "Admin Dashboard",
+        proj3: "Travel Agency",
+        viewBtn: "View",
+        viewGithub: "View All on GitHub",
+        contactTitle: "Get In Touch",
+        formName: "Name",
+        formEmail: "Email",
+        formMessage: "Message",
+        sendBtn: "Send Message",
+        joinComm: "Join the Community",
+        welcomeBack: "Welcome back, developer.",
+        createAcc: "Create an account today."
+      },
+      ar: {
+        home: "الرئيسية",
+        services: "خدماتي",
+        skills: "مهاراتي",
+        portfolio: "أعمالي",
+        contact: "تواصل معي",
+        signup: "إنشاء حساب",
+        login: "تسجيل دخول",
+        role: "مطور ويب | مصمم واجهات",
+        greeting: "بناء تجارب <br><span>رقمية</span>",
+        heroDesc: "أنا مطور شغوف متخصص في HTML و CSS و JavaScript. أحول القهوة إلى أكواد والأفكار إلى واقع.",
+        hireMe: "وظفني",
+        myWork: "أعمالي",
+        servicesTitle: "خدماتي",
+        serv1Title: "تطوير المواقع",
+        serv1Desc: "مواقع متجاوبة مبنية باستخدام HTML الدلالي و CSS الحديث و JavaScript.",
+        serv2Title: "تصميم الواجهات",
+        serv2Desc: "إنشاء واجهات نظيفة وسهلة الاستخدام تبدو رائعة على جميع الأجهزة.",
+        serv3Title: "تحسين الأداء",
+        serv3Desc: "تسريع المواقع وضمان اتباع أفضل ممارسات تحسين محركات البحث (SEO).",
+        skillsTitle: "المهارات التقنية",
+        techExpTitle: "الخبرة التقنية",
+        techExpDesc: "أعمل بتقنيات الويب منذ 4 سنوات. أقوم بتحديث مهاراتي باستمرار لتواكب أحدث اتجاهات الصناعة.",
+        recentWork: "أحدث الأعمال",
+        proj1: "موقع تجارة إلكترونية",
+        proj2: "لوحة تحكم",
+        proj3: "وكالة سفر",
+        viewBtn: "عرض",
+        viewGithub: "عرض الكل على GitHub",
+        contactTitle: "تواصل معي",
+        formName: "الاسم",
+        formEmail: "البريد الإلكتروني",
+        formMessage: "الرسالة",
+        sendBtn: "أرسل الرسالة",
+        joinComm: "انضم للمجتمع",
+        welcomeBack: "مرحباً بعودتك أيها المطور.",
+        createAcc: "أنشئ حساباً اليوم."
+      }
+    };
+
+    let currentLang = 'en';
+
+    function toggleLanguage() {
+      currentLang = currentLang === 'en' ? 'ar' : 'en';
+      
+      document.documentElement.dir = currentLang === 'en' ? 'ltr' : 'rtl';
+
+      const elements = document.querySelectorAll('[data-i18n]');
+      elements.forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if(translations[currentLang][key]) {
+          el.innerHTML = translations[currentLang][key];
+        }
+      });
+
+      if(currentLang === 'ar') {
+         document.getElementById('name').placeholder = "الاسم الكامل";
+         document.getElementById('email').placeholder = "البريد الإلكتروني";
+         document.getElementById('message').placeholder = "كيف يمكنني مساعدتك؟";
+      } else {
+         document.getElementById('name').placeholder = "John Doe";
+         document.getElementById('email').placeholder = "john@example.com";
+         document.getElementById('message').placeholder = "How can I help you?";
+      }
+    }
+
+    const hamburger = document.querySelector('.hamburger');
+    const navLinks = document.querySelector('.nav-links');
+    const navItems = document.querySelectorAll('.nav-item');
+
+    hamburger.addEventListener('click', () => {
+      navLinks.classList.toggle('nav-active');
+      
+      const icon = hamburger.querySelector('i');
+      if (navLinks.classList.contains('nav-active')) {
+        icon.classList.remove('fa-bars');
+        icon.classList.add('fa-times');
+      } else {
+        icon.classList.remove('fa-times');
+        icon.classList.add('fa-bars');
+      }
+    });
+
+    navItems.forEach(item => {
+      item.addEventListener('click', () => {
+        navLinks.classList.remove('nav-active');
+        hamburger.querySelector('i').classList.remove('fa-times');
+        hamburger.querySelector('i').classList.add('fa-bars');
+      });
+    });
+
+    window.addEventListener('scroll', reveal);
+
+    function reveal() {
+      var reveals = document.querySelectorAll('.reveal');
+      for (var i = 0; i < reveals.length; i++) {
+        var windowHeight = window.innerHeight;
+        var elementTop = reveals[i].getBoundingClientRect().top;
+        var elementVisible = 150;
+        if (elementTop < windowHeight - elementVisible) {
+          reveals[i].classList.add('active');
+        }
+      }
+    }
+    reveal();
+
+    const skillSection = document.getElementById('skills');
+    const progressBars = document.querySelectorAll('.skill-fill');
+
+    function showProgress() {
+      progressBars.forEach(progressBar => {
+        const value = progressBar.getAttribute('data-width');
+        progressBar.style.width = value;
+      });
+    }
+
+    function hideProgress() {
+      progressBars.forEach(p => {
+        p.style.width = 0;
+      });
+    }
+
+    window.addEventListener('scroll', () => {
+      const sectionPos = skillSection.getBoundingClientRect().top;
+      const screenPos = window.innerHeight / 1.3;
+      if(sectionPos < screenPos) {
+        showProgress();
+      } else {
+        hideProgress();
+      }
+    });
+
+    const contactForm = document.getElementById('contactForm');
+    contactForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const btn = contactForm.querySelector('button');
+      const originalText = btn.innerText;
+      
+      btn.innerText = currentLang === 'en' ? 'Sending...' : 'جاري الإرسال...';
+      btn.style.backgroundColor = '#2ecc71';
+      
+      setTimeout(() => {
+        btn.innerText = currentLang === 'en' ? 'Message Sent!' : 'تم الإرسال!';
+        btn.style.backgroundColor = '#27ae60';
+        btn.style.borderColor = '#27ae60';
+        contactForm.reset();
+        
+        setTimeout(() => {
+          btn.innerText = originalText;
+          btn.style.backgroundColor = '';
+          btn.style.borderColor = '';
+        }, 3000);
+      }, 1500);
+    });
+
+  </script>
+</body>
+</html>
