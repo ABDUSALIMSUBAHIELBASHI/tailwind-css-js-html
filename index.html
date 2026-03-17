@@ -3,398 +3,406 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Abdu Salim - Web Developer Portfolio</title>
+  <title>Abdu Salim · multilingual + full message system</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ <script src="index.js"></script>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="index.css">
   <style>
-    :root {
-      --primary: #3498db;
-      --primary-dark: #2980b9;
-      --secondary: #2c3e50;
-      --light: #f4f7f6;
-      --dark: #333;
-      --white: #ffffff;
-      --shadow: 0 5px 15px rgba(0,0,0,0.1);
-      --transition: all 0.3s ease;
-    }
 
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
       font-family: 'Poppins', sans-serif;
-      line-height: 1.6;
-      color: var(--dark);
-      background-color: var(--white);
+    }
+    :root {
+      --primary: #3498db;
+      --primary-dark: #2980b9;
+      --secondary: #2c3e50;
+      --light: #f4f7f6;
+      --dark: #1e2b37;
+      --white: #ffffff;
+      --shadow: 0 8px 24px rgba(0,0,0,0.06);
+      --transition: 0.25s ease;
+      --success: #2ecc71;
+      --warning: #f39c12;
+      --danger: #e74c3c;
+    }
+    body {
+      background: #fafcff;
+      color: #1e293b;
+      line-height: 1.5;
       overflow-x: hidden;
     }
-
+    a { text-decoration: none; color: inherit; }
     ul { list-style: none; }
-    a { text-decoration: none; }
-
-    .container {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 0 20px;
-    }
-
+    .container { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
     .section { padding: 80px 0; }
-    .bg-light { background-color: var(--light); }
-    .bg-dark { background-color: var(--secondary); color: var(--white); }
-    
-    .text-center { text-align: center; }
-    .mt-4 { margin-top: 2rem; }
-
+    .bg-light { background: var(--light); }
+    .bg-dark { background: var(--secondary); color: white; }
     .section-title {
-      text-align: center;
-      font-size: 2.5rem;
-      margin-bottom: 60px;
-      position: relative;
-      color: var(--secondary);
+      font-size: 2.3rem; font-weight: 600; text-align: center;
+      margin-bottom: 3rem; color: var(--secondary);
     }
-    
     .section-title::after {
-      content: '';
-      display: block;
-      width: 60px;
-      height: 4px;
-      background: var(--primary);
-      margin: 10px auto 0;
-      border-radius: 2px;
+      content: ''; display: block; width: 70px; height: 4px;
+      background: var(--primary); margin: 12px auto 0; border-radius: 4px;
     }
-    
- 
-    .reveal {
-      opacity: 0;
-      transform: translateY(30px);
-      transition: all 0.8s ease;
-    }
-    .reveal.active {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
     .btn {
-      display: inline-block;
-      background: var(--primary);
-      color: var(--white);
-      padding: 12px 30px;
-      border-radius: 50px;
-      font-weight: 600;
-      transition: var(--transition);
-      border: 2px solid var(--primary);
-      cursor: pointer;
+      display: inline-block; padding: 10px 28px; border-radius: 60px;
+      font-weight: 600; border: 2px solid var(--primary);
+      background: var(--primary); color: white; transition: var(--transition);
+      cursor: pointer; font-size: 0.95rem;
     }
-
-    .btn:hover {
-      background: transparent;
-      color: var(--primary);
-    }
-
-    .btn-outline {
-      background: transparent;
-      color: var(--primary);
-      border: 2px solid var(--primary);
-    }
-
-    .btn-outline:hover {
-      background: var(--primary);
-      color: var(--white);
-    }
-
-    .btn-sm { padding: 8px 20px; font-size: 0.9rem; }
+    .btn:hover { background: transparent; color: var(--primary); }
+    .btn-outline { background: transparent; color: var(--primary); }
+    .btn-outline:hover { background: var(--primary); color: white; }
+    .btn-sm { padding: 6px 20px; font-size: 0.85rem; }
     .btn-block { width: 100%; display: block; text-align: center; }
 
+    /* header */
     header {
-      background: var(--white);
-      box-shadow: var(--shadow);
-      position: fixed;
-      width: 100%;
-      top: 0;
-      z-index: 1000;
+      background: white; box-shadow: var(--shadow); position: sticky; top: 0; z-index: 999;
     }
-
     .navbar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+      display: flex; align-items: center; justify-content: space-between;
       height: 80px;
     }
-
-    .logo {
-      font-size: 1.8rem;
-      font-weight: 700;
-      color: var(--secondary);
-    }
+    .logo { font-size: 2rem; font-weight: 700; color: var(--secondary); }
     .logo span { color: var(--primary); }
-
-    .nav-links { display: flex; gap: 20px; }
-    
-    .nav-links a {
-      color: var(--secondary);
-      font-weight: 500;
-      transition: var(--transition);
-      position: relative;
-    }
-
-    .nav-links a:hover, .nav-links a.active-link { color: var(--primary); }
-
-    .auth-links { display: flex; gap: 10px; align-items: center; }
-    
-   
+    .nav-links { display: flex; gap: 24px; }
+    .nav-links a { font-weight: 500; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--primary); }
+    .auth-links { display: flex; gap: 12px; align-items: center; }
     .lang-btn {
-        background: var(--secondary);
-        color: white;
-        border: none;
-        padding: 5px 15px;
-        border-radius: 20px;
-        font-size: 0.8rem;
-        cursor: pointer;
-        margin-left: 10px;
+      background: var(--secondary); color: white; border: none;
+      padding: 6px 16px; border-radius: 30px; cursor: pointer;
+      font-size: 0.8rem; font-weight: 500;
     }
-    .lang-btn:hover { background: var(--primary); }
+    .hamburger { display: none; font-size: 1.8rem; cursor: pointer; }
 
-    .hamburger { display: none; cursor: pointer; font-size: 1.5rem; color: var(--secondary); }
-
+    /* hero */
     .hero {
-      height: 100vh;
-      display: flex;
-      align-items: center;
-      padding-top: 80px;
+      min-height: 90vh; display: flex; align-items: center;
+      background: linear-gradient(145deg, #ffffff 0%, #eef6fd 100%);
     }
-
     .hero-container {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 2rem;
-      align-items: center;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center;
     }
-
-    .hero-content h1 {
-      font-size: 3.5rem;
-      line-height: 1.2;
-      margin-bottom: 20px;
-      color: var(--secondary);
-    }
-
+    .hero-content h1 { font-size: 3.5rem; line-height: 1.2; color: var(--secondary); }
     .hero-content h1 span { color: var(--primary); }
-    .hero-subtitle { font-size: 1.5rem; color: #666; margin-bottom: 20px; }
-    .hero-description { margin-bottom: 30px; max-width: 500px; }
-
-    .hero-img-wrapper {
-      position: relative;
-      text-align: center;
-    }
-
+    .hero-subtitle { font-size: 1.4rem; color: #4a5b6c; margin: 10px 0 20px; }
     .hero-img-wrapper img {
-      width: 100%;
-      max-width: 450px;
-      border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; 
-      box-shadow: var(--shadow);
-      animation: morph 5s ease-in-out infinite;
+      width: 100%; max-width: 440px; border-radius: 38% 62% 70% 30% / 38% 42% 58% 62%;
+      box-shadow: var(--shadow); animation: morph 7s infinite; border: 4px solid white;
     }
-
     @keyframes morph {
-      0% { border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; }
-      50% { border-radius: 70% 30% 30% 70% / 70% 70% 30% 30%; }
-      100% { border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; }
+      0% { border-radius: 38% 62% 70% 30% / 38% 42% 58% 62%; }
+      50% { border-radius: 58% 42% 38% 62% / 58% 52% 48% 42%; }
+      100% { border-radius: 38% 62% 70% 30% / 38% 42% 58% 62%; }
     }
+    .reveal { opacity: 0; transform: translateY(30px); transition: all 0.7s; }
+    .reveal.active { opacity: 1; transform: translateY(0); }
 
+    /* cards */
     .grid-3 {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 30px;
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(260px,1fr)); gap: 28px;
     }
-
     .card {
-      background: var(--white);
-      padding: 40px 30px;
-      border-radius: 10px;
-      box-shadow: var(--shadow);
-      text-align: center;
-      transition: var(--transition);
+      background: white; padding: 40px 25px; border-radius: 24px;
+      box-shadow: var(--shadow); text-align: center; transition: 0.2s;
     }
-
-    .card:hover { transform: translateY(-10px); }
+    .card:hover { transform: translateY(-8px); }
     .card i { color: var(--primary); margin-bottom: 20px; }
-    .card h3 { margin-bottom: 15px; color: var(--secondary); }
 
+    /* skills */
     .skills-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 50px;
-      align-items: center;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 40px;
     }
+    .skill-item { margin-bottom: 22px; }
+    .skill-header { display: flex; justify-content: space-between; font-weight: 600; }
+    .skill-bar { height: 10px; background: #dee4ec; border-radius: 10px; overflow: hidden; }
+    .skill-fill { height: 100%; background: var(--primary); width: 0; transition: width 1.2s cubic-bezier(0.22, 1, 0.36, 1); }
 
-    .skill-item { margin-bottom: 20px; }
-    .skill-header { display: flex; justify-content: space-between; margin-bottom: 5px; font-weight: 600; }
-    .skill-bar { height: 10px; background: #ddd; border-radius: 5px; overflow: hidden; }
-    .skill-fill { height: 100%; background: var(--primary); border-radius: 5px; width: 0; transition: width 1.5s ease-in-out; }
-
+    /* portfolio */
     .portfolio-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 20px;
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(280px,1fr)); gap: 24px;
     }
-
     .portfolio-item {
-      position: relative;
-      overflow: hidden;
-      border-radius: 10px;
-      box-shadow: var(--shadow);
+      position: relative; border-radius: 28px; overflow: hidden; box-shadow: var(--shadow);
     }
-
-    .portfolio-item img {
-      width: 100%;
-      height: 250px;
-      object-fit: cover;
-      transition: var(--transition);
-      display: block;
-    }
-
+    .portfolio-item img { width: 100%; height: 260px; object-fit: cover; transition: 0.4s; }
     .portfolio-overlay {
-      position: absolute;
-      top: 0; left: 0; width: 100%; height: 100%;
-      background: rgba(52, 152, 219, 0.9);
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      opacity: 0;
-      transition: var(--transition);
-      color: white;
+      position: absolute; inset: 0; background: rgba(52,152,219,0.9);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      opacity: 0; transition: 0.3s; color: white; padding: 20px;
     }
-
     .portfolio-item:hover img { transform: scale(1.1); }
     .portfolio-item:hover .portfolio-overlay { opacity: 1; }
 
-    
-    .form-wrapper {
-      max-width: 600px;
-      margin: 0 auto;
+    /* dashboard */
+    .dashboard-grid {
+      display: grid; grid-template-columns: 2fr 1fr; gap: 24px;
+      margin-top: 30px;
     }
-    
-    .input-group { margin-bottom: 20px; }
-    
-    .input-group input, .input-group textarea {
-      width: 100%;
-      padding: 15px;
-      border: 1px solid #ddd;
-      border-radius: 5px;
-      font-family: inherit;
-      transition: var(--transition);
+    .dashboard-card {
+      background: white; border-radius: 28px; padding: 28px; box-shadow: var(--shadow);
     }
+    .stats-row {
+      display: flex; justify-content: space-between; flex-wrap: wrap; gap: 16px; margin: 20px 0;
+    }
+    .stat-item { background: #f0f7fe; border-radius: 28px; padding: 18px 24px; flex: 1; min-width: 120px; }
+    .stat-value { font-size: 2rem; font-weight: 700; color: var(--primary); line-height: 1.2; }
+    .stat-label { font-size: 0.9rem; color: #4b5e71; }
+    .reel-list { display: flex; flex-direction: column; gap: 15px; margin-top: 15px; }
+    .reel-item {
+      display: flex; align-items: center; gap: 12px; background: #f8fafd; padding: 12px 20px; border-radius: 50px;
+    }
+    .reel-thumb { width: 44px; height: 44px; background: linear-gradient(145deg, #3498db, #a569bd); border-radius: 18px; display: flex; align-items: center; justify-content: center; color: white; }
+    .reel-info { flex: 1; font-weight: 500; }
+    .reel-stats { display: flex; gap: 16px; font-size: 0.85rem; color: #4a5b6c; }
+    .engagement-badge { background: #eef2f6; border-radius: 40px; padding: 2px 12px; }
+    .next-steps { display: flex; gap: 10px; flex-wrap: wrap; margin: 20px 0 10px; }
+    .chip {
+      background: white; border: 1px solid #d0ddee; border-radius: 60px; padding: 6px 20px;
+      font-size: 0.8rem; font-weight: 500; transition: 0.1s; cursor: pointer;
+    }
+    .chip i { margin-right: 6px; color: var(--primary); }
+    .share-story { background: var(--primary); color: white; border: none; padding: 8px 28px; border-radius: 60px; font-weight: 600; cursor: pointer; box-shadow: 0 6px 14px rgba(52,152,219,0.3); }
 
-    .input-group input:focus, .input-group textarea:focus {
-      outline: none;
-      border-color: var(--primary);
-      box-shadow: 0 0 5px rgba(52, 152, 219, 0.3);
-    }
-
+    /* auth forms */
     .auth-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-      gap: 40px;
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(320px,1fr)); gap: 32px;
     }
-
-    .bg-dark .card { color: var(--secondary); } 
-
-    footer {
-      background: #1a252f;
-      color: #fff;
-      padding: 30px 0;
-      text-align: center;
+    .input-group { margin-bottom: 18px; position: relative; }
+    .input-group input, .input-group textarea {
+      width: 100%; padding: 14px 18px; border: 1.5px solid #e0e7ef; border-radius: 40px;
+      font-size: 1rem; transition: 0.2s; background: white;
     }
-    
+    .input-group input:focus { border-color: var(--primary); outline: none; box-shadow: 0 0 0 4px rgba(52,152,219,0.15); }
+    .password-wrapper { position: relative; display: flex; align-items: center; }
+    .password-wrapper input { padding-right: 45px; }
+    .toggle-pw {
+      position: absolute; right: 18px; background: none; border: none;
+      color: #7f8c8d; cursor: pointer; font-size: 1.2rem;
+    }
+    .validation-hint {
+      font-size: 0.7rem; margin-top: 5px; padding-left: 12px;
+      color: #7f8c8d; display: flex; align-items: center; gap: 6px;
+    }
+    .valid-ok { color: #2ecc71; }
+    .invalid { color: #e74c3c; }
+
+    /* message manager */
+    .message-manager {
+      margin-top: 30px; background: #f8fbfe; border-radius: 28px; padding: 20px;
+    }
+    .message-item {
+      display: flex; align-items: center; justify-content: space-between;
+      background: white; padding: 12px 20px; border-radius: 60px; margin-bottom: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.02); border: 1px solid #eef2f8;
+    }
+    .message-content { flex: 1; }
+    .message-name { font-weight: 600; font-size: 0.9rem; }
+    .message-text { color: #4a5e6e; font-size: 0.85rem; }
+    .message-actions button {
+      background: none; border: none; font-size: 1.1rem; margin: 0 5px;
+      cursor: pointer; transition: 0.1s; width: 32px; height: 32px; border-radius: 50%;
+    }
+    .message-actions .delete-btn { color: #e74c3c; }
+    .message-actions .delete-btn:hover { background: #fee9e7; }
+    .message-actions .save-btn { color: #2ecc71; }
+    .message-actions .save-btn:hover { background: #e0f5e9; }
+
+    /* toast */
+    .success-toast {
+      position: fixed; top: 100px; right: 30px; background: white;
+      border-left: 6px solid #2ecc71; border-radius: 20px;
+      padding: 18px 28px; box-shadow: 0 20px 35px rgba(0,0,0,0.15);
+      display: flex; align-items: center; gap: 16px;
+      z-index: 9999; animation: slideIn 0.4s, fadeOut 0.5s 2.5s forwards;
+      font-weight: 500; max-width: 380px;
+    }
+    @keyframes slideIn { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+    @keyframes fadeOut { to { opacity: 0; transform: translateX(20px); visibility: hidden; } }
+
+    /* system status */
+    .system-status {
+      background: #e8f4fe; border-radius: 60px; padding: 12px 24px;
+      display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
+      margin-bottom: 28px; border: 1px solid #c8e2fb;
+    }
+    .status-badge {
+      background: white; border-radius: 40px; padding: 6px 18px;
+      font-size: 0.85rem; font-weight: 600; box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+    }
+    .status-badge.success { background: #2ecc71; color: white; }
+    .blink { animation: blink 2s infinite; }
+    @keyframes blink { 0%{opacity:1;} 50%{opacity:0.6;} 100%{opacity:1;} }
+
+    footer { background: #1a262f; color: white; padding: 30px 0; text-align: center; }
+
+    /* rtl */
+    html[dir="rtl"] .navbar { direction: rtl; }
+    html[dir="rtl"] .nav-links { padding-right: 0; }
+    html[dir="rtl"] .toggle-pw { right: auto; left: 18px; }
     html[dir="rtl"] .hero-content { text-align: right; }
     html[dir="rtl"] .skills-left { text-align: right; }
-    html[dir="rtl"] .lang-btn { margin-right: 10px; margin-left: 0; }
-    html[dir="rtl"] .nav-links { padding-right: 0; }
-
-    @media (max-width: 768px) {
-      .hero-content h1 { font-size: 2.5rem; }
-      .hero-container, .skills-grid { grid-template-columns: 1fr; text-align: center; }
-      html[dir="rtl"] .hero-content { text-align: center; }
-      html[dir="rtl"] .skills-left { text-align: center; }
-
-      .hero-btns { justify-content: center; display: flex; gap: 10px; }
-      
-      .hamburger { display: block; z-index: 1001; }
-      .nav-links {
-        position: fixed;
-        top: 0; right: -100%;
-        width: 70%;
-        height: 100vh;
-        background: var(--white);
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        box-shadow: -5px 0 15px rgba(0,0,0,0.1);
-        transition: var(--transition);
-        z-index: 1000;
-      }
-      html[dir="rtl"] .nav-links { right: auto; left: -100%; }
-      html[dir="rtl"] .nav-links.nav-active { left: 0; }
-      html[dir="ltr"] .nav-links.nav-active { right: 0; }
-
-      .auth-links { display: none; } 
+    
+    @media (max-width: 800px) {
+      .hero-container, .skills-grid, .dashboard-grid { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+      .hamburger { display: block; }
+      .auth-links { display: none; }
     }
   </style>
+
+  <script>
+// Add this to your existing script section
+const API_URL = 'http://localhost:5000/api';
+
+// Update your saveMessage function
+async function saveMessage(e) {
+  e.preventDefault();
+  const name = document.getElementById('msgName').value.trim();
+  const email = document.getElementById('msgEmail').value.trim();
+  const text = document.getElementById('msgText').value.trim();
+  
+  if (!name || !email || !text) {
+    showToast(currentLang === 'en' ? '⚠️ all fields required' : '⚠️ جميع الحقول مطلوبة', false);
+    return false;
+  }
+
+  try {
+    const response = await fetch(`${API_URL}/messages`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        name,
+        email,
+        message: text
+      })
+    });
+
+    const data = await response.json();
+
+    if (data.success) {
+      showToast(currentLang === 'en' ? '✅ message saved successfully' : '✅ تم حفظ الرسالة بنجاح');
+      document.getElementById('messageForm').reset();
+      
+      // Refresh messages if admin (you might want to check if user is admin)
+      // fetchMessages();
+    } else {
+      showToast('❌ Error saving message', false);
+    }
+  } catch (error) {
+    console.error('Error:', error);
+    showToast('❌ Connection error', false);
+  }
+  
+  return false;
+}
+
+// Update login function
+async function fakeGoogleAuth(e, type) {
+  e.preventDefault();
+  let passwordField = type === 'login' ? document.getElementById('loginPassword') : document.getElementById('signupPassword');
+  let emailField = type === 'login' ? document.getElementById('loginEmail') : document.getElementById('signupEmail');
+  let nameField = document.getElementById('signupName');
+  
+  if (!passwordField.value || passwordField.value.length < 6) {
+    showToast(currentLang === 'en' ? '❌ password must be ≥6 characters' : '❌ كلمة المرور يجب أن تكون 6 أحرف على الأقل', false);
+    return false;
+  }
+
+  const btn = e.target.querySelector('button[type="submit"]');
+  const original = btn.innerHTML;
+  btn.innerHTML = '<i class="fas fa-spinner fa-pulse"></i> ' + (currentLang === 'en' ? 'connecting...' : 'جاري الاتصال...');
+  btn.disabled = true;
+
+  try {
+    let endpoint = type === 'login' ? '/auth/login' : '/auth/register';
+    let body = type === 'login' 
+      ? { email: emailField.value, password: passwordField.value }
+      : { name: nameField.value, email: emailField.value, password: passwordField.value };
+
+    const response = await fetch(`${API_URL}${endpoint}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(body)
+    });
+
+    const data = await response.json();
+
+    if (data.success) {
+      // Store token
+      localStorage.setItem('token', data.token);
+      localStorage.setItem('user', JSON.stringify(data.user));
+      
+      const actionText = type === 'login' ? 'login' : 'signup';
+      showToast(`✅ ${actionText} successful · welcome ${data.user.name}`);
+      updateSystemStatus(actionText, data.user.email);
+      
+      // Clear form
+      passwordField.value = '';
+      if (type === 'login') {
+        emailField.value = '';
+      } else {
+        nameField.value = '';
+        emailField.value = '';
+      }
+    } else {
+      showToast(`❌ ${data.message || 'Error'}`, false);
+    }
+  } catch (error) {
+    console.error('Error:', error);
+    showToast('❌ Connection error', false);
+  }
+
+  btn.innerHTML = original;
+  btn.disabled = false;
+  return false;
+}
+</script>
 </head>
 <body>
-
   <header>
     <nav class="navbar container">
-      <div class="logo">Abdu<span>Salim.</span></div>
-      
+      <div class="logo" data-i18n="logo">Abdu<span>Salim.</span></div>
       <ul class="nav-links">
-        <li><a href="#home" class="nav-item" data-i18n="home">Home</a></li>
-        <li><a href="#services" class="nav-item" data-i18n="services">Services</a></li>
-        <li><a href="#skills" class="nav-item" data-i18n="skills">Skills</a></li>
-        <li><a href="#portfolio" class="nav-item" data-i18n="portfolio">Portfolio</a></li>
-        <li><a href="#contact" class="nav-item" data-i18n="contact">Contact</a></li>
+        <li><a href="#home" data-i18n="home">Home</a></li>
+        <li><a href="#services" data-i18n="services">Services</a></li>
+        <li><a href="#skills" data-i18n="skills">Skills</a></li>
+        <li><a href="#portfolio" data-i18n="portfolio">Portfolio</a></li>
+        <li><a href="#dashboard" data-i18n="dashboard">Dashboard</a></li>
+        <li><a href="#auth" data-i18n="join">Join</a></li>
       </ul>
-
       <div class="auth-links">
         <a href="#signup" class="btn btn-sm" data-i18n="signup">Sign Up</a>
         <a href="#login" class="btn btn-sm btn-outline" data-i18n="login">Log In</a>
-        <button class="lang-btn" onclick="toggleLanguage()">عربي ,/, EN</button>
+        <button class="lang-btn" onclick="toggleLanguage()" data-i18n="langBtn">EN / عربي</button>
       </div>
-
-      <div class="hamburger">
-        <i class="fas fa-bars"></i>
-      </div>
+      <div class="hamburger"><i class="fas fa-bars"></i></div>
     </nav>
   </header>
 
   <section id="home" class="hero">
     <div class="container hero-container">
       <div class="hero-content reveal">
-        <p class="hero-subtitle" data-i18n="role">Web Developer | UI/UX Designer</p>
+        <p class="hero-subtitle" data-i18n="role">Web Developer · UI/UX Designer</p>
         <h1 data-i18n="greeting">Building Digital <br><span>Experiences</span></h1>
-        <p class="hero-description" data-i18n="heroDesc">
-          I am a passionate developer specializing in HTML, CSS, and JavaScript. I turn coffee into code and ideas into reality.
-        </p>
-        <div class="hero-btns">
+        <p data-i18n="heroDesc">I turn coffee into code and ideas into interactive reality. 4+ years of front-end craft.</p>
+        <div class="hero-btns" style="margin:25px 0">
           <a href="#contact" class="btn" data-i18n="hireMe">Hire Me</a>
-          <a href="#portfolio" class="btn btn-outline" data-i18n="myWork">My Work</a>
-        </div>
-        <div class="mt-4 social-hero">
-          <a href="#" style="font-size: 1.5rem; margin-right: 15px; color:var(--secondary)"><i class="fab fa-github"></i></a>
-          <a href="#" style="font-size: 1.5rem; margin-right: 15px; color:var(--secondary)"><i class="fab fa-linkedin"></i></a>
-          <a href="#" style="font-size: 1.5rem; color:var(--secondary)"><i class="fab fa-twitter"></i></a>
+          <a href="#portfolio" class="btn btn-outline" style="margin-left:12px" data-i18n="myWork">My Work</a>
         </div>
       </div>
       <div class="hero-img-wrapper reveal">
-        <img src="https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Abdu Salim">
+        <img src="https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?w=600&auto=format" alt="abdu">
       </div>
     </div>
   </section>
@@ -403,68 +411,22 @@
     <div class="container">
       <h2 class="section-title reveal" data-i18n="servicesTitle">My Services</h2>
       <div class="grid-3">
-        <div class="card reveal">
-          <i class="fas fa-code fa-3x"></i>
-          <h3 data-i18n="serv1Title">Web Development</h3>
-          <p data-i18n="serv1Desc">Responsive websites built with semantic HTML, modern CSS, and vanilla JavaScript.</p>
-        </div>
-        <div class="card reveal">
-          <i class="fas fa-paint-brush fa-3x"></i>
-          <h3 data-i18n="serv2Title">UI/UX Design</h3>
-          <p data-i18n="serv2Desc">Creating clean, user-friendly interfaces that look great on all devices.</p>
-        </div>
-        <div class="card reveal">
-          <i class="fas fa-rocket fa-3x"></i>
-          <h3 data-i18n="serv3Title">Optimization</h3>
-          <p data-i18n="serv3Desc">Speeding up websites and ensuring SEO best practices are followed.</p>
-        </div>
+        <div class="card reveal"><i class="fas fa-code fa-3x"></i><h3 data-i18n="serv1Title">Web Dev</h3><p data-i18n="serv1Desc">Semantic HTML, modern CSS, vanilla JS, responsive.</p></div>
+        <div class="card reveal"><i class="fas fa-paint-brush fa-3x"></i><h3 data-i18n="serv2Title">UI/UX Design</h3><p data-i18n="serv2Desc">Clean, user-friendly, pixel-perfect interfaces.</p></div>
+        <div class="card reveal"><i class="fas fa-rocket fa-3x"></i><h3 data-i18n="serv3Title">Optimization</h3><p data-i18n="serv3Desc">Performance, SEO, and core web vitals.</p></div>
       </div>
     </div>
   </section>
 
   <section id="skills" class="section">
     <div class="container">
-      <h2 class="section-title reveal" data-i18n="skillsTitle">My Skills</h2>
+      <h2 class="section-title reveal" data-i18n="skillsTitle">Technical skills</h2>
       <div class="skills-grid">
-        <div class="skills-left reveal">
-            <h3 style="margin-bottom:20px;" data-i18n="techExpTitle">Technical Expertise</h3>
-            <p style="margin-bottom:20px;" data-i18n="techExpDesc">I have been working with web technologies for 4 years. I constantly update my skills to match the latest industry trends.</p>
-            <img src="https://placehold.co/500x300/3498db/FFF?text=Coding+Setup" alt="Coding" style="width:100%; border-radius:10px;">
-        </div>
+        <div class="skills-left reveal"><h3 style="margin-bottom:20px;" data-i18n="techExpTitle">Expertise</h3><p data-i18n="techExpDesc">I constantly update my stack to match modern standards.</p></div>
         <div class="skills-right reveal">
-          
-          <div class="skill-item">
-            <div class="skill-header">
-              <span>HTML5</span>
-              <span>95%</span>
-            </div>
-            <div class="skill-bar"><div class="skill-fill" data-width="95%"></div></div>
-          </div>
-
-          <div class="skill-item">
-            <div class="skill-header">
-              <span>CSS3 & Flexbox/Grid</span>
-              <span>90%</span>
-            </div>
-            <div class="skill-bar"><div class="skill-fill" data-width="90%"></div></div>
-          </div>
-
-          <div class="skill-item">
-            <div class="skill-header">
-              <span>JavaScript</span>
-              <span>85%</span>
-            </div>
-            <div class="skill-bar"><div class="skill-fill" data-width="85%"></div></div>
-          </div>
-
-          <div class="skill-item">
-            <div class="skill-header">
-              <span>Git & GitHub</span>
-              <span>80%</span>
-            </div>
-            <div class="skill-bar"><div class="skill-fill" data-width="80%"></div></div>
-          </div>
-
+          <div class="skill-item"><div class="skill-header"><span>HTML5</span><span>95%</span></div><div class="skill-bar"><div class="skill-fill" data-width="95%"></div></div></div>
+          <div class="skill-item"><div class="skill-header"><span>CSS3</span><span>90%</span></div><div class="skill-bar"><div class="skill-fill" data-width="90%"></div></div></div>
+          <div class="skill-item"><div class="skill-header"><span>JavaScript</span><span>85%</span></div><div class="skill-bar"><div class="skill-fill" data-width="85%"></div></div></div>
         </div>
       </div>
     </div>
@@ -472,302 +434,435 @@
 
   <section id="portfolio" class="section bg-light">
     <div class="container">
-      <h2 class="section-title reveal" data-i18n="recentWork">Recent Work</h2>
+      <h2 class="section-title reveal" data-i18n="recentWork">Recent work</h2>
       <div class="portfolio-grid">
-        <div class="portfolio-item reveal">
-          <img src="https://placehold.co/400x300/2c3e50/FFF?text=E-Commerce" alt="Project 1">
-          <div class="portfolio-overlay">
-            <h3 data-i18n="proj1">E-Commerce Site</h3>
-            <p>HTML, CSS, JS</p>
-            <a href="https://www.udemy.com/topic/javascript/?utm_source=adwords&utm_medium=udemyads&utm_campaign=Search_Keyword_Alpha_Prof_la.ES_cc.ROW-Spanish&campaigntype=Search&portfolio=ROW-Spanish&language=ES&product=Course&test=&audience=Keyword&topic=JavaScript&priority=Alpha&utm_content=deal4584&utm_term=_._ag_160294399850_._ad_775604062686_._kw_curso%20html%20css%20y%20javascript_._de_c_._dm__._pl__._ti_kwd-325725089442_._li_9070450_._pd__._&matchtype=b&gad_source=1&gad_campaignid=21487757262&gbraid=0AAAAADROdO3xtzk1WAdccD0RAKqYDB6Uw&gclid=CjwKCAiAuIDJBhBoEiwAxhgyFqfznLXW0IlTsfKv9m0IzVD6SLd71cXrhl74yrEPy_AO6QfI117sSxoCfxsQAvD_BwE" class="btn btn-sm btn-outline" style="margin-top:10px; color:white; border-color:white;" data-i18n="viewBtn">View</a>
+        <div class="portfolio-item"><img src="https://placehold.co/400x300/2c3e50/FFF?text=E-Commerce"><div class="portfolio-overlay"><h3 data-i18n="proj1">E‑commerce</h3><a href="#" class="btn btn-sm" data-i18n="viewBtn">view</a></div></div>
+        <div class="portfolio-item"><img src="https://placehold.co/400x300/e74c3c/FFF?text=Dashboard"><div class="portfolio-overlay"><h3 data-i18n="proj2">Admin panel</h3><a href="#" class="btn btn-sm" data-i18n="viewBtn">view</a></div></div>
+        <div class="portfolio-item"><img src="https://placehold.co/400x300/27ae60/FFF?text=Travel+App"><div class="portfolio-overlay"><h3 data-i18n="proj3">Travel</h3><a href="#" class="btn btn-sm" data-i18n="viewBtn">view</a></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="dashboard" class="section" style="padding: 40px 0 60px;">
+    <div class="container">
+      <h2 class="section-title reveal" data-i18n="dashboardTitle">📈 dashboard · insights</h2>
+      
+      <div class="system-status reveal" id="systemStatusBar">
+        <i class="fas fa-shield-alt" style="color: var(--primary); font-size: 1.6rem;"></i>
+        <span><strong data-i18n="sysStatus">system status:</strong> <span id="sysMessage" data-i18n="sysIdle">all secure · no active session</span></span>
+        <span class="status-badge" id="sysBadge" data-i18n="idleBadge">🔒 idle</span>
+        <span class="status-badge success blink" id="lastAction" style="margin-left:auto;" data-i18n="lastAction">last action: —</span>
+      </div>
+
+      <div class="dashboard-grid reveal">
+        <div class="dashboard-card">
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <h3 style="font-weight: 600;"><i class="fas fa-chart-pie" style="color:var(--primary)"></i> <span data-i18n="contentOverview">Content overview</span></h3>
+            <span class="chip"><i class="far fa-calendar-alt"></i> <span data-i18n="last29">last 29 days</span></span>
           </div>
-        </div>
-        <div class="portfolio-item reveal">
-          <img src="https://placehold.co/400x300/e74c3c/FFF?text=Dashboard" alt="Project 2">
-          <div class="portfolio-overlay">
-            <h3 data-i18n="proj2">Admin Dashboard</h3>
-            <p>Grid Layout & Charts</p>
-            <a href="https://www.wix.com/lp-en/sl/ecom?utm_source=google&utm_medium=cpc&utm_campaign=21928732450^173751498914^search%20-%20dsa&experiment_id=^^721965827403^&gad_source=1&gad_campaignid=21928732450&gbraid=0AAAAADwEfwWfM95KSKELZ6rwVdMVpbP5n&gclid=CjwKCAiAuIDJBhBoEiwAxhgyFlHmRXp5yiZX9Rd301rVRkUrgDzO0cRPhu8zaGU509AXCAU0c-9QyhoCuegQAvD_BwE" class="btn btn-sm btn-outline" style="margin-top:10px; color:white; border-color:white;" data-i18n="viewBtn">View</a>
+          <div class="stats-row">
+            <div class="stat-item"><span class="stat-value">184k</span> <div class="stat-label" data-i18n="views">views</div></div>
+            <div class="stat-item"><span class="stat-value">12.3k</span> <div class="stat-label" data-i18n="engagement">engagement</div></div>
+            <div class="stat-item"><span class="stat-value">+822</span> <div class="stat-label" data-i18n="netFollowers">net followers</div></div>
           </div>
+          <div style="display: flex; gap: 30px; margin: 25px 0 10px; border-bottom: 2px solid #ecf1f6; padding-bottom: 12px;">
+            <span style="font-weight: 600;"><i class="fas fa-chart-line" style="color: var(--primary);"></i> <span data-i18n="insights">insights</span></span>
+            <span><i class="far fa-clock"></i> <span data-i18n="lastDay">last day: +8.2%</span></span>
+            <span><i class="far fa-eye"></i> <span data-i18n="trend29">29d trend +31%</span></span>
+          </div>
+          <h4 style="margin: 20px 0 12px;"><i class="fas fa-play-circle" style="color: var(--primary);"></i> <span data-i18n="topPlayed">top‑played reels</span></h4>
+          <div class="reel-list">
+            <div class="reel-item"><div class="reel-thumb"><i class="fas fa-film"></i></div><div class="reel-info">dark UI reel</div><div class="reel-stats"><span>230k plays</span><span>❤️ 4.1k</span></div></div>
+            <div class="reel-item"><div class="reel-thumb"><i class="fas fa-camera-retro"></i></div><div class="reel-info">code snippet</div><div class="reel-stats"><span>187k plays</span><span>❤️ 2.9k</span></div></div>
+            <div class="reel-item"><div class="reel-thumb"><i class="fas fa-palette"></i></div><div class="reel-info">figma to html</div><div class="reel-stats"><span>96k plays</span><span>❤️ 1.8k</span></div></div>
+          </div>
+          <div class="next-steps">
+            <span class="chip" onclick="systemAction('share top reel')"><i class="fas fa-rocket"></i> <span data-i18n="shareTop">share your top reel</span></span>
+            <span class="chip" onclick="systemAction('add to story')"><i class="fas fa-plus-circle"></i> <span data-i18n="addStory">add to story</span></span>
+            <span class="chip" onclick="systemAction('see all insights')"><i class="fas fa-chart-simple"></i> <span data-i18n="seeInsights">see all insights</span></span>
+          </div>
+          <button class="share-story" onclick="systemAction('share reel to story')"><i class="fab fa-instagram"></i> <span data-i18n="shareStory">share your reel to story</span></button>
         </div>
-        <div class="portfolio-item reveal">
-          <img src="https://placehold.co/400x300/27ae60/FFF?text=Travel+App" alt="Project 3">
-          <div class="portfolio-overlay">
-            <h3 data-i18n="proj3">Travel Agency</h3>
-            <p>Landing Page</p>
-            <a href="https://www.booking.com/searchresults.en.html?aid=311984&label=slbn_-Rzl8m7vzJhYr6rL9%2A3HS9QS626019398824%3Apl%3Ata%3Ap1%3Ap2%3Aac%3Aap%3Aneg%3Afi%3Atikwd-686882255%3Alp9070450%3Ali%3Adec%3Adm%3Appccp%3DUmFuZG9tSVYkc2RlIyh9YbSsBl3MCvHsD8UKUHIRFxY&sid=b795850c459c0d1b643ee6413123452d&dest_id=4263223&dest_type=hotel&;gad_campaignid=8471304869;gclid=CjwKCAiAuIDJBhBoEiwAxhgyFpgxKgbWP-A-BCF2xSfqbX1Vc02mt2sdCPaN_IdABKcwWYWeu0A6-BoC9J8QAvD_BwE;gad_source=1;gbraid=0AAAAAD_Ls1K05eokSEvsmn_PzjOs8LRkG" class="btn btn-sm btn-outline" style="margin-top:10px; color:white; border-color:white;" data-i18n="viewBtn">View</a>
+        <div class="dashboard-card">
+          <h3><i class="fas fa-user-astronaut"></i> <span data-i18n="yourReel">your reel</span></h3>
+          <div style="background: linear-gradient(130deg, #101b29, #1f3246); color: white; border-radius: 28px; padding: 22px; margin: 22px 0;">
+            <div style="display: flex; align-items: center; gap: 15px;">
+              <i class="fas fa-clapperboard fa-2x"></i>
+              <span style="font-weight: 600;" data-i18n="reelTitle">“CSS grid tricks”</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; margin-top: 20px;">
+              <span><i class="far fa-eye"></i> 49k</span>
+              <span><i class="far fa-heart"></i> 2.1k</span>
+              <span><i class="far fa-comment"></i> 98</span>
+            </div>
+          </div>
+          <div style="display: flex; justify-content: space-between;" class="engagement-badge">
+            <span><i class="fas fa-arrow-up" style="color:#2ecc71;"></i> <span data-i18n="engPlus">engagement +9%</span></span>
+            <span><i class="fas fa-users"></i> <span data-i18n="netPlus">net +822</span></span>
           </div>
         </div>
       </div>
-      <div class="text-center mt-4 reveal">
-        <a href="https://github.com/ABDUSALIMSUBAHIELBASHI?tab=repositories" target="_blank" class="btn btn-outline" data-i18n="viewGithub">View All on GitHub</a>
+    </div>
+  </section>
+
+  <section id="auth" class="section bg-dark" style="scroll-margin-top: 20px;">
+    <div class="container">
+      <h2 class="section-title" style="color:white;" data-i18n="joinTitle">🔐 join community · secure</h2>
+      <div class="auth-grid">
+        <div id="login" class="card reveal">
+          <h3 data-i18n="login">Log In</h3>
+          <p style="margin-bottom: 20px;" data-i18n="welcomeBack">Welcome back, dev.</p>
+          <form id="loginForm" onsubmit="return fakeGoogleAuth(event, 'login')">
+            <div class="input-group"><input type="email" placeholder="Email" id="loginEmail" data-i18n-placeholder="emailPlace" required></div>
+            <div class="input-group password-wrapper">
+              <input type="password" placeholder="Password" id="loginPassword" required minlength="6" data-i18n-placeholder="passPlace">
+              <button type="button" class="toggle-pw" onclick="togglePassword('loginPassword',this)"><i class="far fa-eye-slash"></i></button>
+            </div>
+            <div class="validation-hint" id="loginHint"><i class="fas fa-info-circle"></i> <span data-i18n="min6">min 6 characters</span></div>
+            <button class="btn btn-block" style="margin-top: 8px;" type="submit"><i class="fab fa-google"></i>  <span data-i18n="loginGoogle">login with google</span></button>
+          </form>
+        </div>
+        <div id="signup" class="card reveal">
+          <h3 data-i18n="signup">Sign Up</h3>
+          <p style="margin-bottom: 20px;" data-i18n="createAcc">create account · min 6 chars</p>
+          <form id="signupForm" onsubmit="return fakeGoogleAuth(event, 'signup')">
+            <div class="input-group"><input type="text" placeholder="Full name" id="signupName" data-i18n-placeholder="namePlace" required></div>
+            <div class="input-group"><input type="email" placeholder="Email" id="signupEmail" data-i18n-placeholder="emailPlace" required></div>
+            <div class="input-group password-wrapper">
+              <input type="password" placeholder="Password" id="signupPassword" required minlength="6" oninput="checkPasswordStrength(this.value)" data-i18n-placeholder="passPlace">
+              <button type="button" class="toggle-pw" onclick="togglePassword('signupPassword',this)"><i class="far fa-eye-slash"></i></button>
+            </div>
+            <div class="validation-hint" id="signupHint"><i class="fas fa-circle"></i> <span data-i18n="min6Req">6+ characters required</span></div>
+            <button class="btn btn-outline btn-block" type="submit"><i class="fab fa-google"></i>  <span data-i18n="signupGoogle">sign up with google</span></button>
+          </form>
+        </div>
       </div>
     </div>
   </section>
 
   <section id="contact" class="section">
-    <div class="container form-wrapper">
-      <h2 class="section-title reveal" data-i18n="contactTitle">Get In Touch</h2>
-      <form id="contactForm" class="card reveal">
-        <div class="input-group">
-          <label data-i18n="formName">Name</label>
-          <input type="text" id="name" required placeholder="John Doe">
-        </div>
-        <div class="input-group">
-          <label data-i18n="formEmail">Email</label>
-          <input type="email" id="email" required placeholder="john@example.com">
-        </div>
-        <div class="input-group">
-          <label data-i18n="formMessage">Message</label>
-          <textarea id="message" rows="5" required placeholder="How can I help you?"></textarea>
-        </div>
-        <button type="submit" class="btn btn-block" data-i18n="sendBtn">Send Message</button>
-      </form>
-    </div>
-  </section>
-
-  <section id="auth" class="section bg-dark">
     <div class="container">
-      <h2 class="section-title" style="color:white;" data-i18n="joinComm">Join the Community</h2>
-      <div class="auth-grid">
-        
-        <div id="login" class="card reveal">
-          <h3 data-i18n="login">Log In</h3>
-          <p style="margin-bottom:20px;" data-i18n="welcomeBack">Welcome back, developer.</p>
-          <form onsubmit="event.preventDefault(); alert('Login Logic Here');">
-            <div class="input-group">
-              <input type="email" placeholder="Email" required>
-            </div>
-            <div class="input-group">
-              <input type="password" placeholder="Password" required>
-            </div>
-            <button class="btn btn-block" data-i18n="login">Log In</button>
-          </form>
-        </div>
+      <h2 class="section-title reveal" data-i18n="contactTitle">get in touch · message manager</h2>
+      
+      <div class="card reveal" style="padding: 30px; margin-bottom: 30px;">
+        <form id="messageForm" onsubmit="return saveMessage(event)">
+          <div class="input-group">
+            <input type="text" id="msgName" data-i18n-placeholder="yourName" placeholder="Your name" required>
+          </div>
+          <div class="input-group">
+            <input type="email" id="msgEmail" data-i18n-placeholder="yourEmail" placeholder="Your email" required>
+          </div>
+          <div class="input-group">
+            <textarea id="msgText" rows="3" data-i18n-placeholder="yourMessage" placeholder="Your message" required></textarea>
+          </div>
+          <button type="submit" class="btn btn-block"><i class="fas fa-save"></i> <span data-i18n="saveMsg">save message</span></button>
+        </form>
+      </div>
 
-        <div id="signup" class="card reveal">
-          <h3 data-i18n="signup">Sign Up</h3>
-          <p style="margin-bottom:20px;" data-i18n="createAcc">Create an account today.</p>
-          <form onsubmit="event.preventDefault(); alert('Signup Logic Here');">
-            <div class="input-group">
-              <input type="text" placeholder="Full Name" required>
-            </div>
-            <div class="input-group">
-              <input type="email" placeholder="Email" required>
-            </div>
-            <div class="input-group">
-              <input type="password" placeholder="Create Password" required>
-            </div>
-            <button class="btn btn-outline btn-block" data-i18n="signup">Sign Up</button>
-          </form>
-        </div>
-
+      <div class="message-manager reveal" id="messageManager">
+        <h3 style="margin-bottom: 18px;"><i class="fas fa-inbox"></i> <span data-i18n="yourMessages">your messages · full control</span></h3>
+        <div id="messageList"></div>
+        <p id="noMessages" style="text-align: center; color: #7f8c8d; padding: 20px;" data-i18n="noMessages">no saved messages yet. use the form above.</p>
       </div>
     </div>
   </section>
 
   <footer>
-    <div class="container">
-      <p>&copy; 2023 Abdu Salim. All rights reserved.</p>
-      <p style="font-size:0.8rem; margin-top:10px; opacity:0.7;">Designed with HTML, CSS, & JS</p>
-    </div>
+    <p data-i18n="footer">© 2025 Abdu Salim · multilingual · full action success</p>
   </footer>
 
+  <div id="toastContainer" style="position: fixed; top: 100px; right: 30px; z-index: 9999;"></div>
+
   <script>
+    // ---------- MULTILINGUAL TRANSLATIONS ----------
     const translations = {
       en: {
-        home: "Home",
-        services: "Services",
-        skills: "Skills",
-        portfolio: "Portfolio",
-        contact: "Contact",
-        signup: "Sign Up",
-        login: "Log In",
-        role: "Web Developer | UI/UX Designer",
+        logo: "Abdu<span>Salim.</span>",
+        home: "Home", services: "Services", skills: "Skills", portfolio: "Portfolio", dashboard: "Dashboard", join: "Join",
+        signup: "Sign Up", login: "Log In", langBtn: "EN / عربي",
+        role: "Web Developer · UI/UX Designer",
         greeting: "Building Digital <br><span>Experiences</span>",
-        heroDesc: "I am a passionate developer specializing in HTML, CSS, and JavaScript. I turn coffee into code and ideas into reality.",
-        hireMe: "Hire Me",
-        myWork: "My Work",
+        heroDesc: "I turn coffee into code and ideas into interactive reality. 4+ years of front-end craft.",
+        hireMe: "Hire Me", myWork: "My Work",
         servicesTitle: "My Services",
-        serv1Title: "Web Development",
-        serv1Desc: "Responsive websites built with semantic HTML, modern CSS, and vanilla JavaScript.",
-        serv2Title: "UI/UX Design",
-        serv2Desc: "Creating clean, user-friendly interfaces that look great on all devices.",
-        serv3Title: "Optimization",
-        serv3Desc: "Speeding up websites and ensuring SEO best practices are followed.",
-        skillsTitle: "My Skills",
-        techExpTitle: "Technical Expertise",
-        techExpDesc: "I have been working with web technologies for 4 years. I constantly update my skills to match the latest industry trends.",
-        recentWork: "Recent Work",
-        proj1: "E-Commerce Site",
-        proj2: "Admin Dashboard",
-        proj3: "Travel Agency",
-        viewBtn: "View",
-        viewGithub: "View All on GitHub",
-        contactTitle: "Get In Touch",
-        formName: "Name",
-        formEmail: "Email",
-        formMessage: "Message",
-        sendBtn: "Send Message",
-        joinComm: "Join the Community",
-        welcomeBack: "Welcome back, developer.",
-        createAcc: "Create an account today."
+        serv1Title: "Web Dev", serv1Desc: "Semantic HTML, modern CSS, vanilla JS, responsive.",
+        serv2Title: "UI/UX Design", serv2Desc: "Clean, user-friendly, pixel-perfect interfaces.",
+        serv3Title: "Optimization", serv3Desc: "Performance, SEO, and core web vitals.",
+        skillsTitle: "Technical skills",
+        techExpTitle: "Expertise", techExpDesc: "I constantly update my stack to match modern standards.",
+        recentWork: "Recent work",
+        proj1: "E‑commerce", proj2: "Admin panel", proj3: "Travel", viewBtn: "view",
+        dashboardTitle: "📈 dashboard · insights",
+        sysStatus: "system status:", sysIdle: "all secure · no active session", idleBadge: "🔒 idle", lastAction: "last action: —",
+        contentOverview: "Content overview", last29: "last 29 days", views: "views", engagement: "engagement", netFollowers: "net followers",
+        insights: "insights", lastDay: "last day: +8.2%", trend29: "29d trend +31%",
+        topPlayed: "top‑played reels", shareTop: "share your top reel", addStory: "add to story", seeInsights: "see all insights",
+        shareStory: "share your reel to story", yourReel: "your reel", reelTitle: "“CSS grid tricks”",
+        engPlus: "engagement +9%", netPlus: "net +822",
+        joinTitle: "🔐 join community · secure",
+        welcomeBack: "Welcome back, dev.", createAcc: "create account · min 6 chars",
+        emailPlace: "Email", passPlace: "Password", namePlace: "Full name",
+        min6: "min 6 characters", min6Req: "6+ characters required",
+        loginGoogle: "login with google", signupGoogle: "sign up with google",
+        contactTitle: "get in touch · message manager",
+        yourName: "Your name", yourEmail: "Your email", yourMessage: "Your message",
+        saveMsg: "save message", yourMessages: "your messages · full control", noMessages: "no saved messages yet. use the form above.",
+        footer: "© 2025 Abdu Salim · multilingual · full action success"
       },
       ar: {
-        home: "الرئيسية",
-        services: "خدماتي",
-        skills: "مهاراتي",
-        portfolio: "أعمالي",
-        contact: "تواصل معي",
-        signup: "إنشاء حساب",
-        login: "تسجيل دخول",
-        role: "مطور ويب | مصمم واجهات",
+        logo: "عبدو<span>سليم.</span>",
+        home: "الرئيسية", services: "الخدمات", skills: "المهارات", portfolio: "الأعمال", dashboard: "لوحة القيادة", join: "انضم",
+        signup: "إنشاء حساب", login: "تسجيل الدخول", langBtn: "EN / عربي",
+        role: "مطور ويب · مصمم واجهات",
         greeting: "بناء تجارب <br><span>رقمية</span>",
-        heroDesc: "أنا مطور شغوف متخصص في HTML و CSS و JavaScript. أحول القهوة إلى أكواد والأفكار إلى واقع.",
-        hireMe: "وظفني",
-        myWork: "أعمالي",
+        heroDesc: "أحول القهوة إلى أكواد والأفكار إلى واقع تفاعلي. أكثر من 4 سنوات من خبرة الواجهات الأمامية.",
+        hireMe: "وظفني", myWork: "أعمالي",
         servicesTitle: "خدماتي",
-        serv1Title: "تطوير المواقع",
-        serv1Desc: "مواقع متجاوبة مبنية باستخدام HTML الدلالي و CSS الحديث و JavaScript.",
-        serv2Title: "تصميم الواجهات",
-        serv2Desc: "إنشاء واجهات نظيفة وسهلة الاستخدام تبدو رائعة على جميع الأجهزة.",
-        serv3Title: "تحسين الأداء",
-        serv3Desc: "تسريع المواقع وضمان اتباع أفضل ممارسات تحسين محركات البحث (SEO).",
+        serv1Title: "تطوير ويب", serv1Desc: "HTML دلالي، CSS حديث، JavaScript خالص، متجاوب.",
+        serv2Title: "تصميم UI/UX", serv2Desc: "واجهات نظيفة وسهلة الاستخدام ومثالية البكسلات.",
+        serv3Title: "تحسين الأداء", serv3Desc: "أداء، تحسين محركات البحث ومؤشرات الويب الأساسية.",
         skillsTitle: "المهارات التقنية",
-        techExpTitle: "الخبرة التقنية",
-        techExpDesc: "أعمل بتقنيات الويب منذ 4 سنوات. أقوم بتحديث مهاراتي باستمرار لتواكب أحدث اتجاهات الصناعة.",
+        techExpTitle: "الخبرة", techExpDesc: "أحدث مهاراتي باستمرار لتواكب المعايير الحديثة.",
         recentWork: "أحدث الأعمال",
-        proj1: "موقع تجارة إلكترونية",
-        proj2: "لوحة تحكم",
-        proj3: "وكالة سفر",
-        viewBtn: "عرض",
-        viewGithub: "عرض الكل على GitHub",
-        contactTitle: "تواصل معي",
-        formName: "الاسم",
-        formEmail: "البريد الإلكتروني",
-        formMessage: "الرسالة",
-        sendBtn: "أرسل الرسالة",
-        joinComm: "انضم للمجتمع",
-        welcomeBack: "مرحباً بعودتك أيها المطور.",
-        createAcc: "أنشئ حساباً اليوم."
+        proj1: "تجارة إلكترونية", proj2: "لوحة تحكم", proj3: "سفر", viewBtn: "عرض",
+        dashboardTitle: "📈 لوحة القيادة · insights",
+        sysStatus: "حالة النظام:", sysIdle: "آمن · لا توجد جلسة نشطة", idleBadge: "🔒 خامل", lastAction: "آخر حدث: —",
+        contentOverview: "نظرة عامة على المحتوى", last29: "آخر 29 يومًا", views: "مشاهدات", engagement: "تفاعل", netFollowers: "متابعين صافٍ",
+        insights: "تحليلات", lastDay: "آخر يوم: +8.2%", trend29: "اتجاه 29 يوم +31%",
+        topPlayed: "أكثر الـ reels تشغيلاً", shareTop: "شارك أفضل reel", addStory: "أضف للقصة", seeInsights: "عرض كل التحليلات",
+        shareStory: "شارك الـ reel في قصتك", yourReel: "الـ reel الخاص بك", reelTitle: "“حيل CSS grid”",
+        engPlus: "التفاعل +9%", netPlus: "صافي +822",
+        joinTitle: "🔐 انضم للمجتمع · آمن",
+        welcomeBack: "مرحباً بعودتك أيها المطور.", createAcc: "أنشئ حساب · 6 أحرف كحد أدنى",
+        emailPlace: "البريد الإلكتروني", passPlace: "كلمة المرور", namePlace: "الاسم الكامل",
+        min6: "6 أحرف كحد أدنى", min6Req: "6+ أحرف مطلوبة",
+        loginGoogle: "تسجيل الدخول باستخدام جوجل", signupGoogle: "إنشاء حساب باستخدام جوجل",
+        contactTitle: "تواصل · إدارة الرسائل",
+        yourName: "اسمك", yourEmail: "بريدك", yourMessage: "رسالتك",
+        saveMsg: "حفظ الرسالة", yourMessages: "رسائلك · تحكم كامل", noMessages: "لا توجد رسائل محفوظة بعد. استخدم النموذج أعلاه.",
+        footer: "© 2025 عبدو سليم · متعدد اللغات · نجاح الإجراء الكامل"
       }
     };
 
     let currentLang = 'en';
 
-    function toggleLanguage() {
-      currentLang = currentLang === 'en' ? 'ar' : 'en';
-      
-      document.documentElement.dir = currentLang === 'en' ? 'ltr' : 'rtl';
-
+    function translatePage() {
       const elements = document.querySelectorAll('[data-i18n]');
       elements.forEach(el => {
         const key = el.getAttribute('data-i18n');
-        if(translations[currentLang][key]) {
-          el.innerHTML = translations[currentLang][key];
+        if (translations[currentLang][key]) {
+          if (key === 'logo') el.innerHTML = translations[currentLang][key];
+          else el.innerText = translations[currentLang][key];
         }
       });
-
-      if(currentLang === 'ar') {
-         document.getElementById('name').placeholder = "الاسم الكامل";
-         document.getElementById('email').placeholder = "البريد الإلكتروني";
-         document.getElementById('message').placeholder = "كيف يمكنني مساعدتك؟";
-      } else {
-         document.getElementById('name').placeholder = "John Doe";
-         document.getElementById('email').placeholder = "john@example.com";
-         document.getElementById('message').placeholder = "How can I help you?";
-      }
-    }
-
-    const hamburger = document.querySelector('.hamburger');
-    const navLinks = document.querySelector('.nav-links');
-    const navItems = document.querySelectorAll('.nav-item');
-
-    hamburger.addEventListener('click', () => {
-      navLinks.classList.toggle('nav-active');
-      
-      const icon = hamburger.querySelector('i');
-      if (navLinks.classList.contains('nav-active')) {
-        icon.classList.remove('fa-bars');
-        icon.classList.add('fa-times');
-      } else {
-        icon.classList.remove('fa-times');
-        icon.classList.add('fa-bars');
-      }
-    });
-
-    navItems.forEach(item => {
-      item.addEventListener('click', () => {
-        navLinks.classList.remove('nav-active');
-        hamburger.querySelector('i').classList.remove('fa-times');
-        hamburger.querySelector('i').classList.add('fa-bars');
+      const placeholders = document.querySelectorAll('[data-i18n-placeholder]');
+      placeholders.forEach(el => {
+        const key = el.getAttribute('data-i18n-placeholder');
+        if (translations[currentLang][key]) el.placeholder = translations[currentLang][key];
       });
-    });
-
-    window.addEventListener('scroll', reveal);
-
-    function reveal() {
-      var reveals = document.querySelectorAll('.reveal');
-      for (var i = 0; i < reveals.length; i++) {
-        var windowHeight = window.innerHeight;
-        var elementTop = reveals[i].getBoundingClientRect().top;
-        var elementVisible = 150;
-        if (elementTop < windowHeight - elementVisible) {
-          reveals[i].classList.add('active');
-        }
-      }
+      document.documentElement.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
+      document.documentElement.lang = currentLang;
     }
-    reveal();
 
-    const skillSection = document.getElementById('skills');
-    const progressBars = document.querySelectorAll('.skill-fill');
+    function toggleLanguage() {
+      currentLang = currentLang === 'en' ? 'ar' : 'en';
+      translatePage();
+      showToast(`🌐 ${currentLang === 'en' ? 'English' : 'العربية'}`, false);
+    }
 
-    function showProgress() {
-      progressBars.forEach(progressBar => {
-        const value = progressBar.getAttribute('data-width');
-        progressBar.style.width = value;
+    // ---------- MESSAGE MANAGEMENT ----------
+    let messages = JSON.parse(localStorage.getItem('contactMessages')) || [];
+
+    function renderMessages() {
+      const listDiv = document.getElementById('messageList');
+      const noMsg = document.getElementById('noMessages');
+      if (!listDiv) return;
+      if (messages.length === 0) {
+        listDiv.innerHTML = '';
+        noMsg.style.display = 'block';
+        return;
+      }
+      noMsg.style.display = 'none';
+      let html = '';
+      messages.forEach((msg, index) => {
+        html += `<div class="message-item" data-index="${index}">
+          <div class="message-content">
+            <div class="message-name">${escapeHtml(msg.name)} · ${escapeHtml(msg.email)}</div>
+            <div class="message-text">${escapeHtml(msg.text)}</div>
+          </div>
+          <div class="message-actions">
+            <button class="save-btn" onclick="copyAndSaveMessage(${index})" title="${currentLang === 'en' ? 'save copy' : 'حفظ نسخة'}"><i class="fas fa-copy"></i></button>
+            <button class="delete-btn" onclick="deleteMessage(${index})" title="${currentLang === 'en' ? 'delete' : 'حذف'}"><i class="fas fa-trash"></i></button>
+          </div>
+        </div>`;
+      });
+      listDiv.innerHTML = html;
+    }
+
+    function escapeHtml(unsafe) {
+      return unsafe.replace(/[&<>"]/g, function(m) {
+        if(m === '&') return '&amp;'; if(m === '<') return '&lt;'; if(m === '>') return '&gt;'; if(m === '"') return '&quot;';
+        return m;
       });
     }
 
-    function hideProgress() {
-      progressBars.forEach(p => {
-        p.style.width = 0;
-      });
-    }
-
-    window.addEventListener('scroll', () => {
-      const sectionPos = skillSection.getBoundingClientRect().top;
-      const screenPos = window.innerHeight / 1.3;
-      if(sectionPos < screenPos) {
-        showProgress();
-      } else {
-        hideProgress();
-      }
-    });
-
-    const contactForm = document.getElementById('contactForm');
-    contactForm.addEventListener('submit', (e) => {
+    function saveMessage(e) {
       e.preventDefault();
-      const btn = contactForm.querySelector('button');
-      const originalText = btn.innerText;
+      const name = document.getElementById('msgName').value.trim();
+      const email = document.getElementById('msgEmail').value.trim();
+      const text = document.getElementById('msgText').value.trim();
+      if (!name || !email || !text) {
+        showToast(currentLang === 'en' ? '⚠️ all fields required' : '⚠️ جميع الحقول مطلوبة', false);
+        return false;
+      }
+      const newMsg = { name, email, text, date: new Date().toLocaleString() };
+      messages.push(newMsg);
+      localStorage.setItem('contactMessages', JSON.stringify(messages));
+      renderMessages();
+      document.getElementById('messageForm').reset();
+      showToast(currentLang === 'en' ? '✅ message saved successfully' : '✅ تم حفظ الرسالة بنجاح');
+      systemAction(currentLang === 'en' ? 'message saved' : 'تم حفظ الرسالة');
+      return false;
+    }
+
+    function deleteMessage(index) {
+      if (index >= 0 && index < messages.length) {
+        const deleted = messages.splice(index, 1);
+        localStorage.setItem('contactMessages', JSON.stringify(messages));
+        renderMessages();
+        showToast(`${currentLang === 'en' ? '🗑️ message from' : '🗑️ رسالة من'} ${deleted[0].name} ${currentLang === 'en' ? 'deleted' : 'محذوفة'}`);
+        systemAction(currentLang === 'en' ? 'message deleted' : 'تم حذف الرسالة');
+      }
+    }
+
+    function copyAndSaveMessage(index) {
+      if (index >= 0 && index < messages.length) {
+        const orig = messages[index];
+        const newMsg = { ...orig, name: orig.name + (currentLang === 'en' ? ' (copy)' : ' (نسخة)'), date: new Date().toLocaleString() };
+        messages.push(newMsg);
+        localStorage.setItem('contactMessages', JSON.stringify(messages));
+        renderMessages();
+        showToast(currentLang === 'en' ? '📋 message duplicated' : '📋 تم نسخ الرسالة');
+        systemAction(currentLang === 'en' ? 'message duplicated' : 'تم نسخ الرسالة');
+      }
+    }
+
+    // ---------- TOAST ----------
+    function showToast(message, isSuccess = true) {
+      const container = document.getElementById('toastContainer');
+      const toast = document.createElement('div');
+      toast.className = 'success-toast';
+      toast.innerHTML = `<i class="fas ${isSuccess ? 'fa-check-circle' : 'fa-info-circle'}"></i>
+                        <div class="msg">${message}</div>`;
+      container.appendChild(toast);
+      setTimeout(() => { if (toast.parentNode) toast.remove(); }, 3500);
+    }
+
+    // ---------- AUTH / SYSTEM ----------
+    function togglePassword(fieldId, btn) {
+      const pwInput = document.getElementById(fieldId);
+      const icon = btn.querySelector('i');
+      if (pwInput.type === 'password') {
+        pwInput.type = 'text';
+        icon.classList.remove('fa-eye-slash'); icon.classList.add('fa-eye');
+      } else {
+        pwInput.type = 'password';
+        icon.classList.remove('fa-eye'); icon.classList.add('fa-eye-slash');
+      }
+    }
+
+    function checkPasswordStrength(val) {
+      const hint = document.getElementById('signupHint');
+      if (val.length >= 6) {
+        hint.innerHTML = `<i class="fas fa-check-circle valid-ok"></i> ${currentLang === 'en' ? 'strong enough (min 6)' : 'قوية كافية (6 أحرف)'}`;
+        hint.style.color = '#2ecc71';
+      } else {
+        hint.innerHTML = `<i class="fas fa-exclamation-circle invalid"></i> ${currentLang === 'en' ? 'minimum 6 characters' : '6 أحرف على الأقل'}`;
+        hint.style.color = '#e74c3c';
+      }
+    }
+
+    function updateSystemStatus(action, email = '') {
+      const sysMsg = document.getElementById('sysMessage');
+      const sysBadge = document.getElementById('sysBadge');
+      const lastAction = document.getElementById('lastAction');
+      sysMsg.innerText = currentLang === 'en' ? `authenticated · ${action} successful` : `مُصادق · ${action === 'login' ? 'تسجيل دخول' : 'إنشاء حساب'} ناجح`;
+      sysBadge.innerHTML = '✅ active session';
+      sysBadge.classList.add('success');
+      lastAction.innerHTML = `${currentLang === 'en' ? 'last action:' : 'آخر حدث:'} ${action} ${email ? '· '+email : ''}`;
+    }
+
+    function systemAction(action) {
+      showToast(`⚡ ${currentLang === 'en' ? 'action:' : 'حدث:'} ${action}`, false);
+      const lastAction = document.getElementById('lastAction');
+      if (lastAction) lastAction.innerHTML = `${currentLang === 'en' ? 'last action:' : 'آخر حدث:'} ${action} · ${currentLang === 'en' ? 'just now' : 'الآن'}`;
+    }
+
+    function fakeGoogleAuth(e, type) {
+      e.preventDefault();
+      let passwordField = type === 'login' ? document.getElementById('loginPassword') : document.getElementById('signupPassword');
+      let hintDiv = type === 'login' ? document.getElementById('loginHint') : document.getElementById('signupHint');
+      let emailField = type === 'login' ? document.getElementById('loginEmail') : document.getElementById('signupEmail');
       
-      btn.innerText = currentLang === 'en' ? 'Sending...' : 'جاري الإرسال...';
-      btn.style.backgroundColor = '#2ecc71';
-      
+      if (!passwordField.value || passwordField.value.length < 6) {
+        hintDiv.innerHTML = `<i class="fas fa-times-circle invalid"></i> ${currentLang === 'en' ? 'password must be ≥6 characters' : 'كلمة المرور يجب أن تكون 6 أحرف على الأقل'}`;
+        hintDiv.style.color = '#e74c3c';
+        return false;
+      }
+
+      const btn = e.target.querySelector('button[type="submit"]');
+      const original = btn.innerHTML;
+      btn.innerHTML = '<i class="fas fa-spinner fa-pulse"></i> ' + (currentLang === 'en' ? 'connecting...' : 'جاري الاتصال...');
+      btn.disabled = true;
+
       setTimeout(() => {
-        btn.innerText = currentLang === 'en' ? 'Message Sent!' : 'تم الإرسال!';
-        btn.style.backgroundColor = '#27ae60';
-        btn.style.borderColor = '#27ae60';
-        contactForm.reset();
-        
-        setTimeout(() => {
-          btn.innerText = originalText;
-          btn.style.backgroundColor = '';
-          btn.style.borderColor = '';
-        }, 3000);
-      }, 1500);
+        const actionText = type === 'login' ? (currentLang === 'en' ? 'login' : 'تسجيل دخول') : (currentLang === 'en' ? 'signup' : 'إنشاء حساب');
+        const email = emailField.value.split('@')[0] || 'user';
+        showToast(`✅ ${actionText} ${currentLang === 'en' ? 'successful · welcome' : 'ناجح · مرحباً'} ${email}`);
+        updateSystemStatus(type, emailField.value);
+        btn.innerHTML = original;
+        btn.disabled = false;
+        if (type === 'signup') {
+          document.getElementById('signupHint').innerHTML = `<i class="fas fa-circle"></i> ${currentLang === 'en' ? '6+ characters required' : '6+ أحرف مطلوبة'}`;
+        } else {
+          document.getElementById('loginHint').innerHTML = `<i class="fas fa-info-circle"></i> ${currentLang === 'en' ? 'min 6 characters' : '6 أحرف كحد أدنى'}`;
+        }
+        passwordField.value = '';
+      }, 1200);
+      return false;
+    }
+
+    // ---------- SCROLL REVEAL ----------
+    window.addEventListener('scroll', function() {
+      let reveals = document.querySelectorAll('.reveal');
+      for (let i = 0; i < reveals.length; i++) {
+        let windowHeight = window.innerHeight;
+        let top = reveals[i].getBoundingClientRect().top;
+        if (top < windowHeight - 100) reveals[i].classList.add('active');
+      }
+      document.querySelectorAll('.skill-fill').forEach(bar => {
+        let rect = bar.closest('.skills-right')?.getBoundingClientRect();
+        if (rect && rect.top < window.innerHeight - 80) {
+          bar.style.width = bar.getAttribute('data-width') || '85%';
+        }
+      });
+    }); window.dispatchEvent(new Event('scroll'));
+
+    document.querySelector('.hamburger').addEventListener('click', function() {
+      showToast(currentLang === 'en' ? '🍔 menu (demo)' : '🍔 القائمة (تجريبي)', false);
     });
 
+    // initial render & language
+    renderMessages();
+    translatePage();
   </script>
+  <style>
+    .fa-check-circle { color: #2ecc71; }
+    .fa-exclamation-circle, .fa-times-circle { color: #e74c3c; }
+    .toggle-pw { background: none; border: none; font-size: 1.2rem; }
+    .dashboard-card h3 i { color: var(--primary); margin-right: 6px; }
+    .system-status { transition: 0.2s; }
+    html[dir="rtl"] .chip i { margin-left: 6px; margin-right: 0; }
+  </style>
 </body>
 </html>
