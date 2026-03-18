@@ -3,12 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Abdu Salim · multilingual + full message system</title>
+  <title>FAYCEL MOHAMED AHMED – Engineer</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
- <script src="index.js"></script>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
   <style>
-
+    /* ----- RESET & VARIABLES ----- */
     * {
       margin: 0;
       padding: 0;
@@ -24,845 +23,455 @@
       --white: #ffffff;
       --shadow: 0 8px 24px rgba(0,0,0,0.06);
       --transition: 0.25s ease;
-      --success: #2ecc71;
-      --warning: #f39c12;
-      --danger: #e74c3c;
+      --eng-color: #e74c3c;
+      --dutch-color: #ff6b6b;
+      --anime-glow: 0 0 20px rgba(52,152,219,0.5);
     }
     body {
-      background: #fafcff;
+      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
       color: #1e293b;
       line-height: 1.5;
       overflow-x: hidden;
+      position: relative;
+    }
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: radial-gradient(circle at 20% 50%, rgba(52,152,219,0.1) 0%, transparent 50%);
+      pointer-events: none;
+      z-index: -1;
+      animation: pulseGlow 8s ease-in-out infinite;
+    }
+    @keyframes pulseGlow {
+      0%, 100% { opacity: 0.5; }
+      50% { opacity: 1; }
     }
     a { text-decoration: none; color: inherit; }
     ul { list-style: none; }
     .container { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
-    .section { padding: 80px 0; }
-    .bg-light { background: var(--light); }
-    .bg-dark { background: var(--secondary); color: white; }
+    .section { padding: 80px 0; position: relative; }
+    .bg-light { background: rgba(255,255,255,0.8); backdrop-filter: blur(10px); }
+    .bg-eng { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; }
     .section-title {
-      font-size: 2.3rem; font-weight: 600; text-align: center;
-      margin-bottom: 3rem; color: var(--secondary);
+      font-size: 2.5rem;
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 3rem;
+      color: var(--secondary);
+      position: relative;
+      display: inline-block;
+      left: 50%;
+      transform: translateX(-50%);
     }
     .section-title::after {
-      content: ''; display: block; width: 70px; height: 4px;
-      background: var(--primary); margin: 12px auto 0; border-radius: 4px;
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, var(--primary), transparent);
+      animation: slideLine 2s ease-in-out infinite;
+    }
+    @keyframes slideLine {
+      0% { transform: scaleX(0.3); opacity: 0.5; }
+      50% { transform: scaleX(1); opacity: 1; }
+      100% { transform: scaleX(0.3); opacity: 0.5; }
     }
     .btn {
-      display: inline-block; padding: 10px 28px; border-radius: 60px;
+      display: inline-block; padding: 12px 32px; border-radius: 60px;
       font-weight: 600; border: 2px solid var(--primary);
       background: var(--primary); color: white; transition: var(--transition);
       cursor: pointer; font-size: 0.95rem;
+      position: relative; overflow: hidden; z-index: 1;
     }
+    .btn::before {
+      content: ''; position: absolute; top: 50%; left: 50%;
+      width: 0; height: 0; border-radius: 50%;
+      background: rgba(255,255,255,0.3);
+      transform: translate(-50%, -50%);
+      transition: width 0.6s, height 0.6s; z-index: -1;
+    }
+    .btn:hover::before { width: 300px; height: 300px; }
     .btn:hover { background: transparent; color: var(--primary); }
     .btn-outline { background: transparent; color: var(--primary); }
     .btn-outline:hover { background: var(--primary); color: white; }
-    .btn-sm { padding: 6px 20px; font-size: 0.85rem; }
+    .btn-sm { padding: 8px 24px; font-size: 0.85rem; }
     .btn-block { width: 100%; display: block; text-align: center; }
 
-    /* header */
+    /* floating anime */
+    .floating-element {
+      position: absolute; width: 100px; height: 100px;
+      background: linear-gradient(135deg, var(--primary), transparent);
+      border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+      opacity: 0.1; animation: float 10s ease-in-out infinite; z-index: 0;
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-20px) rotate(10deg); }
+    }
+    .float-1 { top: 10%; left: 5%; }
+    .float-2 { bottom: 10%; right: 5%; width: 150px; height: 150px; animation-delay: 2s; }
+    .float-3 { top: 50%; right: 10%; animation-delay: 4s; }
+
+    /* ----- RESPONSIVE MENU (NAV) ----- */
     header {
-      background: white; box-shadow: var(--shadow); position: sticky; top: 0; z-index: 999;
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(10px);
+      box-shadow: var(--shadow);
+      position: sticky;
+      top: 0;
+      z-index: 999;
+      animation: slideDown 0.8s ease-out;
+    }
+    @keyframes slideDown {
+      from { transform: translateY(-100%); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
     }
     .navbar {
       display: flex; align-items: center; justify-content: space-between;
       height: 80px;
     }
-    .logo { font-size: 2rem; font-weight: 700; color: var(--secondary); }
+    .logo { 
+      font-size: 1.7rem; 
+      font-weight: 700; 
+      color: var(--secondary);
+      white-space: nowrap;
+    }
     .logo span { color: var(--primary); }
-    .nav-links { display: flex; gap: 24px; }
-    .nav-links a { font-weight: 500; transition: color 0.2s; }
+    .nav-links { display: flex; gap: 24px; transition: 0.3s; }
+    .nav-links a { 
+      font-weight: 500; 
+      transition: 0.3s;
+      position: relative;
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute; bottom: -5px; left: 0;
+      width: 0; height: 2px; background: var(--primary); transition: width 0.3s;
+    }
+    .nav-links a:hover::after { width: 100%; }
     .nav-links a:hover { color: var(--primary); }
     .auth-links { display: flex; gap: 12px; align-items: center; }
     .lang-btn {
       background: var(--secondary); color: white; border: none;
-      padding: 6px 16px; border-radius: 30px; cursor: pointer;
-      font-size: 0.8rem; font-weight: 500;
+      padding: 8px 20px; border-radius: 30px; cursor: pointer;
+      font-size: 0.9rem; font-weight: 500; display: flex; align-items: center; gap: 8px;
+      transition: 0.3s;
     }
-    .hamburger { display: none; font-size: 1.8rem; cursor: pointer; }
+    .lang-btn:hover { background: var(--primary); transform: scale(1.05); }
+    .hamburger { display: none; font-size: 2rem; cursor: pointer; user-select: none; }
 
-    /* hero */
-    .hero {
-      min-height: 90vh; display: flex; align-items: center;
-      background: linear-gradient(145deg, #ffffff 0%, #eef6fd 100%);
+    /* mobile menu overlay */
+    .mobile-menu {
+      position: fixed; top: 80px; left: 0; right: 0;
+      background: rgba(255,255,255,0.98); backdrop-filter: blur(10px);
+      padding: 30px 20px; border-radius: 0 0 30px 30px;
+      box-shadow: 0 20px 30px rgba(0,0,0,0.1);
+      display: none; flex-direction: column; gap: 20px;
+      z-index: 1000; text-align: center;
+      transform-origin: top; animation: slideMenu 0.3s ease-out;
     }
-    .hero-container {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center;
+    @keyframes slideMenu {
+      from { transform: scaleY(0); opacity: 0; }
+      to { transform: scaleY(1); opacity: 1; }
     }
-    .hero-content h1 { font-size: 3.5rem; line-height: 1.2; color: var(--secondary); }
+    .mobile-menu a {
+      font-size: 1.3rem; font-weight: 500; color: var(--secondary);
+      padding: 12px; border-radius: 40px; transition: 0.2s;
+    }
+    .mobile-menu a:hover { background: var(--primary); color: white; }
+    .mobile-menu.show { display: flex; }
+
+    /* hero, cards etc (keep your original design) */
+    .hero { min-height: 90vh; display: flex; align-items: center; position: relative; overflow: hidden; }
+    .hero-container { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; position: relative; z-index: 2; }
+    .hero-content h1 { font-size: 3.5rem; line-height: 1.2; color: var(--secondary); margin-bottom: 20px; }
     .hero-content h1 span { color: var(--primary); }
-    .hero-subtitle { font-size: 1.4rem; color: #4a5b6c; margin: 10px 0 20px; }
-    .hero-img-wrapper img {
-      width: 100%; max-width: 440px; border-radius: 38% 62% 70% 30% / 38% 42% 58% 62%;
-      box-shadow: var(--shadow); animation: morph 7s infinite; border: 4px solid white;
-    }
-    @keyframes morph {
-      0% { border-radius: 38% 62% 70% 30% / 38% 42% 58% 62%; }
-      50% { border-radius: 58% 42% 38% 62% / 58% 52% 48% 42%; }
-      100% { border-radius: 38% 62% 70% 30% / 38% 42% 58% 62%; }
-    }
+    .hero-subtitle { font-size: 1.4rem; color: #4a5b6c; margin: 10px 0 20px; display: flex; align-items: center; gap: 15px; }
+    .hero-img-wrapper { position: relative; animation: slideInRight 1s ease-out; }
+    .hero-img-wrapper img { width: 100%; max-width: 400px; border-radius: 38% 62% 70% 30% / 38% 42% 58% 62%; box-shadow: var(--shadow); border: 4px solid white; }
+    .experience-badge { position: absolute; bottom: 20px; right: 20px; background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color: white; padding: 15px 20px; border-radius: 60px; font-weight: 600; }
+    .grid-4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap: 25px; }
+    .eng-card { background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); padding: 30px 20px; border-radius: 24px; text-align: center; box-shadow: var(--shadow); transition: 0.3s; }
+    .eng-card:hover { transform: translateY(-10px); box-shadow: var(--anime-glow); }
+    .eng-tag { display: inline-block; background: linear-gradient(135deg, #e8f4fe, #d4e6f1); color: var(--primary); padding: 4px 12px; border-radius: 30px; font-size: 0.7rem; font-weight: 600; margin: 5px; }
+    .lang-card { background: linear-gradient(135deg, #ff6b6b, #ff8e8e); color: white; padding: 30px 20px; border-radius: 24px; text-align: center; transition: 0.3s; }
+    .dutch-card { background: linear-gradient(135deg, #ff6b6b, #ff4757); border: 2px solid rgba(255,255,255,0.3); animation: dutchPulse 2s infinite; }
+    @keyframes dutchPulse { 0%,100%{transform:scale(1);} 50%{transform:scale(1.02);} }
+    .skills-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+    .skill-bar { height: 10px; background: #dee4ec; border-radius: 10px; overflow: hidden; }
+    .skill-fill { height: 100%; background: linear-gradient(90deg, var(--primary), var(--primary-dark)); width: 0; transition: width 1.2s; }
+    .portfolio-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px,1fr)); gap: 24px; }
+    .portfolio-item { position: relative; border-radius: 28px; overflow: hidden; }
+    .portfolio-overlay { position: absolute; inset: 0; background: linear-gradient(135deg, rgba(52,152,219,0.95), rgba(41,128,185,0.95)); display: flex; flex-direction: column; align-items: center; justify-content: center; opacity: 0; transition: 0.3s; color: white; padding: 20px; }
+    .portfolio-item:hover .portfolio-overlay { opacity: 1; }
+    .chip { background: white; border: 1px solid #d0ddee; border-radius: 60px; padding: 8px 24px; font-size: 0.9rem; font-weight: 500; display: inline-block; margin: 5px; transition: 0.3s; }
+    .chip:hover { background: var(--primary); color: white; }
+    .contact-form { background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); padding: 40px; border-radius: 28px; box-shadow: var(--shadow); }
+    .input-group input, .input-group textarea { width: 100%; padding: 14px 18px; border: 2px solid #e0e7ef; border-radius: 40px; font-size: 1rem; transition: 0.3s; }
+    .input-group input:focus, .input-group textarea:focus { border-color: var(--primary); outline: none; box-shadow: 0 0 0 4px rgba(52,152,219,0.15); transform: scale(1.02); }
     .reveal { opacity: 0; transform: translateY(30px); transition: all 0.7s; }
     .reveal.active { opacity: 1; transform: translateY(0); }
+    footer { background: linear-gradient(135deg, var(--secondary), var(--dark)); color: white; padding: 40px 0; text-align: center; }
+    .footer-email { color: var(--primary); font-size: 1.2rem; display: inline-block; padding: 10px 30px; background: rgba(255,255,255,0.1); border-radius: 60px; }
 
-    /* cards */
-    .grid-3 {
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(260px,1fr)); gap: 28px;
+    /* rtl adjustments */
+    html[dir="rtl"] .nav-links { padding-right: 0; }
+    html[dir="rtl"] .hero-content { text-align: right; }
+    
+    @media (max-width: 800px) {
+      .hero-container, .skills-grid { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+      .hamburger { display: block; }
+      .auth-links .btn { display: none; }
+      .lang-btn { margin-left: auto; }
+      .logo { font-size: 1.4rem; }
     }
-    .card {
-      background: white; padding: 40px 25px; border-radius: 24px;
-      box-shadow: var(--shadow); text-align: center; transition: 0.2s;
+    @media (max-width: 480px) {
+      .hero-content h1 { font-size: 2.5rem; }
+      .section-title { font-size: 2rem; }
     }
-    .card:hover { transform: translateY(-8px); }
-    .card i { color: var(--primary); margin-bottom: 20px; }
-
-    /* skills */
-    .skills-grid {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 40px;
-    }
-    .skill-item { margin-bottom: 22px; }
-    .skill-header { display: flex; justify-content: space-between; font-weight: 600; }
-    .skill-bar { height: 10px; background: #dee4ec; border-radius: 10px; overflow: hidden; }
-    .skill-fill { height: 100%; background: var(--primary); width: 0; transition: width 1.2s cubic-bezier(0.22, 1, 0.36, 1); }
-
-    /* portfolio */
-    .portfolio-grid {
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(280px,1fr)); gap: 24px;
-    }
-    .portfolio-item {
-      position: relative; border-radius: 28px; overflow: hidden; box-shadow: var(--shadow);
-    }
-    .portfolio-item img { width: 100%; height: 260px; object-fit: cover; transition: 0.4s; }
-    .portfolio-overlay {
-      position: absolute; inset: 0; background: rgba(52,152,219,0.9);
-      display: flex; flex-direction: column; align-items: center; justify-content: center;
-      opacity: 0; transition: 0.3s; color: white; padding: 20px;
-    }
-    .portfolio-item:hover img { transform: scale(1.1); }
-    .portfolio-item:hover .portfolio-overlay { opacity: 1; }
-
-    /* dashboard */
-    .dashboard-grid {
-      display: grid; grid-template-columns: 2fr 1fr; gap: 24px;
-      margin-top: 30px;
-    }
-    .dashboard-card {
-      background: white; border-radius: 28px; padding: 28px; box-shadow: var(--shadow);
-    }
-    .stats-row {
-      display: flex; justify-content: space-between; flex-wrap: wrap; gap: 16px; margin: 20px 0;
-    }
-    .stat-item { background: #f0f7fe; border-radius: 28px; padding: 18px 24px; flex: 1; min-width: 120px; }
-    .stat-value { font-size: 2rem; font-weight: 700; color: var(--primary); line-height: 1.2; }
-    .stat-label { font-size: 0.9rem; color: #4b5e71; }
-    .reel-list { display: flex; flex-direction: column; gap: 15px; margin-top: 15px; }
-    .reel-item {
-      display: flex; align-items: center; gap: 12px; background: #f8fafd; padding: 12px 20px; border-radius: 50px;
-    }
-    .reel-thumb { width: 44px; height: 44px; background: linear-gradient(145deg, #3498db, #a569bd); border-radius: 18px; display: flex; align-items: center; justify-content: center; color: white; }
-    .reel-info { flex: 1; font-weight: 500; }
-    .reel-stats { display: flex; gap: 16px; font-size: 0.85rem; color: #4a5b6c; }
-    .engagement-badge { background: #eef2f6; border-radius: 40px; padding: 2px 12px; }
-    .next-steps { display: flex; gap: 10px; flex-wrap: wrap; margin: 20px 0 10px; }
-    .chip {
-      background: white; border: 1px solid #d0ddee; border-radius: 60px; padding: 6px 20px;
-      font-size: 0.8rem; font-weight: 500; transition: 0.1s; cursor: pointer;
-    }
-    .chip i { margin-right: 6px; color: var(--primary); }
-    .share-story { background: var(--primary); color: white; border: none; padding: 8px 28px; border-radius: 60px; font-weight: 600; cursor: pointer; box-shadow: 0 6px 14px rgba(52,152,219,0.3); }
-
-    /* auth forms */
-    .auth-grid {
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(320px,1fr)); gap: 32px;
-    }
-    .input-group { margin-bottom: 18px; position: relative; }
-    .input-group input, .input-group textarea {
-      width: 100%; padding: 14px 18px; border: 1.5px solid #e0e7ef; border-radius: 40px;
-      font-size: 1rem; transition: 0.2s; background: white;
-    }
-    .input-group input:focus { border-color: var(--primary); outline: none; box-shadow: 0 0 0 4px rgba(52,152,219,0.15); }
-    .password-wrapper { position: relative; display: flex; align-items: center; }
-    .password-wrapper input { padding-right: 45px; }
-    .toggle-pw {
-      position: absolute; right: 18px; background: none; border: none;
-      color: #7f8c8d; cursor: pointer; font-size: 1.2rem;
-    }
-    .validation-hint {
-      font-size: 0.7rem; margin-top: 5px; padding-left: 12px;
-      color: #7f8c8d; display: flex; align-items: center; gap: 6px;
-    }
-    .valid-ok { color: #2ecc71; }
-    .invalid { color: #e74c3c; }
-
-    /* message manager */
-    .message-manager {
-      margin-top: 30px; background: #f8fbfe; border-radius: 28px; padding: 20px;
-    }
-    .message-item {
-      display: flex; align-items: center; justify-content: space-between;
-      background: white; padding: 12px 20px; border-radius: 60px; margin-bottom: 10px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.02); border: 1px solid #eef2f8;
-    }
-    .message-content { flex: 1; }
-    .message-name { font-weight: 600; font-size: 0.9rem; }
-    .message-text { color: #4a5e6e; font-size: 0.85rem; }
-    .message-actions button {
-      background: none; border: none; font-size: 1.1rem; margin: 0 5px;
-      cursor: pointer; transition: 0.1s; width: 32px; height: 32px; border-radius: 50%;
-    }
-    .message-actions .delete-btn { color: #e74c3c; }
-    .message-actions .delete-btn:hover { background: #fee9e7; }
-    .message-actions .save-btn { color: #2ecc71; }
-    .message-actions .save-btn:hover { background: #e0f5e9; }
-
-    /* toast */
     .success-toast {
       position: fixed; top: 100px; right: 30px; background: white;
       border-left: 6px solid #2ecc71; border-radius: 20px;
       padding: 18px 28px; box-shadow: 0 20px 35px rgba(0,0,0,0.15);
       display: flex; align-items: center; gap: 16px;
       z-index: 9999; animation: slideIn 0.4s, fadeOut 0.5s 2.5s forwards;
-      font-weight: 500; max-width: 380px;
     }
     @keyframes slideIn { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
     @keyframes fadeOut { to { opacity: 0; transform: translateX(20px); visibility: hidden; } }
-
-    /* system status */
-    .system-status {
-      background: #e8f4fe; border-radius: 60px; padding: 12px 24px;
-      display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
-      margin-bottom: 28px; border: 1px solid #c8e2fb;
-    }
-    .status-badge {
-      background: white; border-radius: 40px; padding: 6px 18px;
-      font-size: 0.85rem; font-weight: 600; box-shadow: 0 2px 8px rgba(0,0,0,0.03);
-    }
-    .status-badge.success { background: #2ecc71; color: white; }
-    .blink { animation: blink 2s infinite; }
-    @keyframes blink { 0%{opacity:1;} 50%{opacity:0.6;} 100%{opacity:1;} }
-
-    footer { background: #1a262f; color: white; padding: 30px 0; text-align: center; }
-
-    /* rtl */
-    html[dir="rtl"] .navbar { direction: rtl; }
-    html[dir="rtl"] .nav-links { padding-right: 0; }
-    html[dir="rtl"] .toggle-pw { right: auto; left: 18px; }
-    html[dir="rtl"] .hero-content { text-align: right; }
-    html[dir="rtl"] .skills-left { text-align: right; }
-    
-    @media (max-width: 800px) {
-      .hero-container, .skills-grid, .dashboard-grid { grid-template-columns: 1fr; }
-      .nav-links { display: none; }
-      .hamburger { display: block; }
-      .auth-links { display: none; }
-    }
   </style>
-
-  <script>
-// Add this to your existing script section
-const API_URL = 'http://localhost:5000/api';
-
-// Update your saveMessage function
-async function saveMessage(e) {
-  e.preventDefault();
-  const name = document.getElementById('msgName').value.trim();
-  const email = document.getElementById('msgEmail').value.trim();
-  const text = document.getElementById('msgText').value.trim();
-  
-  if (!name || !email || !text) {
-    showToast(currentLang === 'en' ? '⚠️ all fields required' : '⚠️ جميع الحقول مطلوبة', false);
-    return false;
-  }
-
-  try {
-    const response = await fetch(`${API_URL}/messages`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        name,
-        email,
-        message: text
-      })
-    });
-
-    const data = await response.json();
-
-    if (data.success) {
-      showToast(currentLang === 'en' ? '✅ message saved successfully' : '✅ تم حفظ الرسالة بنجاح');
-      document.getElementById('messageForm').reset();
-      
-      // Refresh messages if admin (you might want to check if user is admin)
-      // fetchMessages();
-    } else {
-      showToast('❌ Error saving message', false);
-    }
-  } catch (error) {
-    console.error('Error:', error);
-    showToast('❌ Connection error', false);
-  }
-  
-  return false;
-}
-
-// Update login function
-async function fakeGoogleAuth(e, type) {
-  e.preventDefault();
-  let passwordField = type === 'login' ? document.getElementById('loginPassword') : document.getElementById('signupPassword');
-  let emailField = type === 'login' ? document.getElementById('loginEmail') : document.getElementById('signupEmail');
-  let nameField = document.getElementById('signupName');
-  
-  if (!passwordField.value || passwordField.value.length < 6) {
-    showToast(currentLang === 'en' ? '❌ password must be ≥6 characters' : '❌ كلمة المرور يجب أن تكون 6 أحرف على الأقل', false);
-    return false;
-  }
-
-  const btn = e.target.querySelector('button[type="submit"]');
-  const original = btn.innerHTML;
-  btn.innerHTML = '<i class="fas fa-spinner fa-pulse"></i> ' + (currentLang === 'en' ? 'connecting...' : 'جاري الاتصال...');
-  btn.disabled = true;
-
-  try {
-    let endpoint = type === 'login' ? '/auth/login' : '/auth/register';
-    let body = type === 'login' 
-      ? { email: emailField.value, password: passwordField.value }
-      : { name: nameField.value, email: emailField.value, password: passwordField.value };
-
-    const response = await fetch(`${API_URL}${endpoint}`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(body)
-    });
-
-    const data = await response.json();
-
-    if (data.success) {
-      // Store token
-      localStorage.setItem('token', data.token);
-      localStorage.setItem('user', JSON.stringify(data.user));
-      
-      const actionText = type === 'login' ? 'login' : 'signup';
-      showToast(`✅ ${actionText} successful · welcome ${data.user.name}`);
-      updateSystemStatus(actionText, data.user.email);
-      
-      // Clear form
-      passwordField.value = '';
-      if (type === 'login') {
-        emailField.value = '';
-      } else {
-        nameField.value = '';
-        emailField.value = '';
-      }
-    } else {
-      showToast(`❌ ${data.message || 'Error'}`, false);
-    }
-  } catch (error) {
-    console.error('Error:', error);
-    showToast('❌ Connection error', false);
-  }
-
-  btn.innerHTML = original;
-  btn.disabled = false;
-  return false;
-}
-</script>
 </head>
 <body>
+  <!-- floating decoration -->
+  <div class="floating-element float-1"></div>
+  <div class="floating-element float-2"></div>
+  <div class="floating-element float-3"></div>
+
+  <!-- Contact bar (original) -->
+  <div class="contact-bar" style="background:var(--secondary); color:white; padding:15px 0;">
+    <div class="container contact-bar-content" style="display:flex; justify-content:center; gap:40px; flex-wrap:wrap;">
+      <div class="contact-bar-item"><i class="fas fa-envelope"></i> <a href="mailto:salimabdu759@gmail.com">salimabdu759@gmail.com</a></div>
+      <div class="contact-bar-item"><i class="fas fa-phone"></i> +250 739390715</div>
+      <div class="contact-bar-item"><i class="fas fa-map-marker-alt"></i> Kigali, Rwanda · Netherlands · EU</div>
+    </div>
+  </div>
+
+  <!-- HEADER with responsive menu -->
   <header>
     <nav class="navbar container">
-      <div class="logo" data-i18n="logo">Abdu<span>Salim.</span></div>
+      <div class="logo" data-i18n="logo">FAYCEL MOHAMED AHMED.</div>
+      <!-- desktop menu -->
       <ul class="nav-links">
         <li><a href="#home" data-i18n="home">Home</a></li>
-        <li><a href="#services" data-i18n="services">Services</a></li>
+        <li><a href="#engineering" data-i18n="engineering">Engineering</a></li>
+        <li><a href="#languages" data-i18n="languages">Languages</a></li>
         <li><a href="#skills" data-i18n="skills">Skills</a></li>
         <li><a href="#portfolio" data-i18n="portfolio">Portfolio</a></li>
-        <li><a href="#dashboard" data-i18n="dashboard">Dashboard</a></li>
-        <li><a href="#auth" data-i18n="join">Join</a></li>
+        <li><a href="#projects" data-i18n="projects">Projects</a></li>
+        <li><a href="#contact" data-i18n="contact">Contact</a></li>
       </ul>
       <div class="auth-links">
-        <a href="#signup" class="btn btn-sm" data-i18n="signup">Sign Up</a>
-        <a href="#login" class="btn btn-sm btn-outline" data-i18n="login">Log In</a>
-        <button class="lang-btn" onclick="toggleLanguage()" data-i18n="langBtn">EN / عربي</button>
+        <button class="lang-btn" onclick="toggleLanguage()">
+          <i class="fas fa-globe"></i>
+          <span id="currentLang">English</span>
+        </button>
       </div>
-      <div class="hamburger"><i class="fas fa-bars"></i></div>
+      <!-- hamburger icon -->
+      <div class="hamburger" id="hamburgerBtn"><i class="fas fa-bars"></i></div>
     </nav>
+    <!-- mobile menu overlay (hidden by default) -->
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="#home" data-i18n="home" onclick="closeMobileMenu()">Home</a>
+      <a href="#engineering" data-i18n="engineering" onclick="closeMobileMenu()">Engineering</a>
+      <a href="#languages" data-i18n="languages" onclick="closeMobileMenu()">Languages</a>
+      <a href="#skills" data-i18n="skills" onclick="closeMobileMenu()">Skills</a>
+      <a href="#portfolio" data-i18n="portfolio" onclick="closeMobileMenu()">Portfolio</a>
+      <a href="#projects" data-i18n="projects" onclick="closeMobileMenu()">Projects</a>
+      <a href="#contact" data-i18n="contact" onclick="closeMobileMenu()">Contact</a>
+    </div>
   </header>
 
+  <!-- rest of your original content (unchanged structure) -->
   <section id="home" class="hero">
     <div class="container hero-container">
-      <div class="hero-content reveal">
-        <p class="hero-subtitle" data-i18n="role">Web Developer · UI/UX Designer</p>
-        <h1 data-i18n="greeting">Building Digital <br><span>Experiences</span></h1>
-        <p data-i18n="heroDesc">I turn coffee into code and ideas into interactive reality. 4+ years of front-end craft.</p>
-        <div class="hero-btns" style="margin:25px 0">
-          <a href="#contact" class="btn" data-i18n="hireMe">Hire Me</a>
-          <a href="#portfolio" class="btn btn-outline" style="margin-left:12px" data-i18n="myWork">My Work</a>
-        </div>
+      <div class="hero-content">
+        <div class="hero-subtitle"><i class="fas fa-code"></i><span data-i18n="role">Hi name is FAYCEL MOHAMED AHMED</span></div>
+        <h1 data-i18n="greeting">l,m Engineer</h1>
+        <p data-i18n="heroDesc">I turn coffee into code and ideas into reality. Software Engineer specializing in full-stack development, system architecture, and scalable solutions. Based in Rwanda & Netherlands, serving clients across EU and Africa.</p>
+        <div class="hero-btns" style="margin:30px 0"><a href="#contact" class="btn" data-i18n="hireMe">Hire Me</a><a href="#portfolio" class="btn btn-outline" style="margin-left:12px" data-i18n="myWork">View Work</a></div>
+        <div style="display:flex; gap:20px;"><span><i class="fab fa-github"></i> 50+ repos</span><span><i class="fas fa-project-diagram"></i> 30+ projects</span><span><i class="fas fa-users"></i> 15+ clients</span></div>
       </div>
-      <div class="hero-img-wrapper reveal">
-        <img src="https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?w=600&auto=format" alt="abdu">
+      <div class="hero-img-wrapper"><img src="salim.png" alt="FAYCEL MOHAMED AHMED"><div class="experience-badge"><i class="fas fa-award"></i> 8+ Years</div></div>
+    </div>
+  </section>
+
+  <section id="engineering" class="section bg-eng">
+    <div class="container">
+      <h2 class="section-title reveal" style="color:white;" data-i18n="engineeringTitle">🔧 Software Engineering Specializations</h2>
+      <p class="reveal" style="text-align:center; color:white; margin-bottom:40px;" data-i18n="engineeringDesc">Expertise across multiple engineering domains</p>
+      <!-- Engineering stats, cards (keep as is) -->
+      <div class="engineering-stats reveal" style="background:rgba(255,255,255,0.1); border-radius:60px; padding:30px 40px; display:flex; justify-content:space-between; flex-wrap:wrap; color:white;">
+        <div class="stat-item"><div class="stat-number">8+</div><div class="stat-label">Years Experience</div></div>
+        <div class="stat-item"><div class="stat-number">12</div><div class="stat-label">Engineering Fields</div></div>
+        <div class="stat-item"><div class="stat-number">50+</div><div class="stat-label">Projects Delivered</div></div>
+        <div class="stat-item"><div class="stat-number">5</div><div class="stat-label">Languages</div></div>
+      </div>
+      <div class="grid-4 reveal">
+        <div class="eng-card"><i class="fas fa-code"></i><h3>Frontend Engineering</h3><p>React, Vue, Angular</p><div><span class="eng-tag">React</span><span class="eng-tag">Vue</span></div></div>
+        <div class="eng-card"><i class="fas fa-server"></i><h3>Backend Engineering</h3><p>Node.js, Python, Java</p><div><span class="eng-tag">Node.js</span><span class="eng-tag">Python</span></div></div>
+        <div class="eng-card"><i class="fas fa-layer-group"></i><h3>Full Stack</h3><p>MERN, MEAN</p><div><span class="eng-tag">MERN</span><span class="eng-tag">JAMstack</span></div></div>
+        <div class="eng-card"><i class="fas fa-cloud-upload-alt"></i><h3>DevOps</h3><p>Docker, K8s, AWS</p><div><span class="eng-tag">Docker</span><span class="eng-tag">K8s</span></div></div>
+        <div class="eng-card"><i class="fas fa-database"></i><h3>Data Engineering</h3><p>Spark, Kafka</p><div><span class="eng-tag">Spark</span><span class="eng-tag">Kafka</span></div></div>
+        <div class="eng-card"><i class="fas fa-brain"></i><h3>AI/ML</h3><p>TensorFlow, PyTorch</p><div><span class="eng-tag">TF</span><span class="eng-tag">PyTorch</span></div></div>
+        <div class="eng-card"><i class="fas fa-mobile-alt"></i><h3>Mobile</h3><p>React Native, Flutter</p><div><span class="eng-tag">RN</span><span class="eng-tag">Flutter</span></div></div>
+        <div class="eng-card"><i class="fas fa-shield-alt"></i><h3>Security</h3><p>OWASP, OAuth</p><div><span class="eng-tag">OWASP</span><span class="eng-tag">JWT</span></div></div>
       </div>
     </div>
   </section>
 
-  <section id="services" class="section bg-light">
+  <section id="languages" class="section">
     <div class="container">
-      <h2 class="section-title reveal" data-i18n="servicesTitle">My Services</h2>
-      <div class="grid-3">
-        <div class="card reveal"><i class="fas fa-code fa-3x"></i><h3 data-i18n="serv1Title">Web Dev</h3><p data-i18n="serv1Desc">Semantic HTML, modern CSS, vanilla JS, responsive.</p></div>
-        <div class="card reveal"><i class="fas fa-paint-brush fa-3x"></i><h3 data-i18n="serv2Title">UI/UX Design</h3><p data-i18n="serv2Desc">Clean, user-friendly, pixel-perfect interfaces.</p></div>
-        <div class="card reveal"><i class="fas fa-rocket fa-3x"></i><h3 data-i18n="serv3Title">Optimization</h3><p data-i18n="serv3Desc">Performance, SEO, and core web vitals.</p></div>
+      <h2 class="section-title reveal" data-i18n="langTitle">💬 Languages I Speak</h2>
+      <div class="grid-4 reveal" style="margin-bottom:40px;">
+        <div class="lang-card dutch-card"><div class="lang-flag"><i class="fas fa-flag"></i></div><i class="fas fa-crown" style="color:gold; position:absolute; top:20px; right:20px;"></i><h3>Dutch</h3><p>Nederlands · Fluent</p></div>
+        <div class="lang-card" style="background:linear-gradient(135deg,#3498db,#2980b9);"><div class="lang-flag"><i class="fas fa-flag-usa"></i></div><h3>English</h3><p>Fluent · IELTS 7.5</p></div>
+        <div class="lang-card" style="background:linear-gradient(135deg,#e67e22,#d35400);"><div class="lang-flag"><i class="fas fa-flag"></i></div><h3>Arabic</h3><p>Advanced · عربي</p></div>
+        <div class="lang-card" style="background:linear-gradient(135deg,#9b59b6,#8e44ad);"><div class="lang-flag"><i class="fas fa-flag"></i></div><h3>French</h3><p>Intermediate · B2</p></div>
       </div>
+      <h3 class="reveal" style="text-align:center;" data-i18n="progLangTitle">Programming Languages</h3>
+      <div class="reveal" style="text-align:center;"><span class="chip"><i class="fab fa-js"></i> JS/TS</span><span class="chip"><i class="fab fa-python"></i> Python</span><span class="chip"><i class="fab fa-java"></i> Java</span><span class="chip"><i class="fas fa-database"></i> SQL</span><span class="chip"><i class="fas fa-code"></i> C++</span><span class="chip"><i class="fab fa-php"></i> PHP</span><span class="chip"><i class="fas fa-gem"></i> Ruby</span><span class="chip"><i class="fas fa-code"></i> Go</span><span class="chip"><i class="fas fa-code"></i> Rust</span></div>
     </div>
   </section>
 
-  <section id="skills" class="section">
+  <section id="skills" class="section bg-light">
     <div class="container">
-      <h2 class="section-title reveal" data-i18n="skillsTitle">Technical skills</h2>
+      <h2 class="section-title reveal" data-i18n="skillsTitle">Engineering Skills</h2>
       <div class="skills-grid">
-        <div class="skills-left reveal"><h3 style="margin-bottom:20px;" data-i18n="techExpTitle">Expertise</h3><p data-i18n="techExpDesc">I constantly update my stack to match modern standards.</p></div>
+        <div class="skills-left reveal"><h3 data-i18n="techExpTitle">Core Expertise</h3><p data-i18n="techExpDesc">Specialized in multiple engineering domains with focus on scalability.</p></div>
         <div class="skills-right reveal">
-          <div class="skill-item"><div class="skill-header"><span>HTML5</span><span>95%</span></div><div class="skill-bar"><div class="skill-fill" data-width="95%"></div></div></div>
-          <div class="skill-item"><div class="skill-header"><span>CSS3</span><span>90%</span></div><div class="skill-bar"><div class="skill-fill" data-width="90%"></div></div></div>
-          <div class="skill-item"><div class="skill-header"><span>JavaScript</span><span>85%</span></div><div class="skill-bar"><div class="skill-fill" data-width="85%"></div></div></div>
+          <div class="skill-item"><div class="skill-header"><span>Software Architecture</span><span>92%</span></div><div class="skill-bar"><div class="skill-fill" data-width="92%"></div></div></div>
+          <div class="skill-item"><div class="skill-header"><span>System Design</span><span>90%</span></div><div class="skill-bar"><div class="skill-fill" data-width="90%"></div></div></div>
+          <div class="skill-item"><div class="skill-header"><span>API Design</span><span>91%</span></div><div class="skill-bar"><div class="skill-fill" data-width="91%"></div></div></div>
         </div>
       </div>
     </div>
   </section>
 
-  <section id="portfolio" class="section bg-light">
+  <section id="portfolio" class="section">
     <div class="container">
-      <h2 class="section-title reveal" data-i18n="recentWork">Recent work</h2>
+      <h2 class="section-title reveal" data-i18n="recentWork">Engineering Portfolio</h2>
       <div class="portfolio-grid">
-        <div class="portfolio-item"><img src="https://placehold.co/400x300/2c3e50/FFF?text=E-Commerce"><div class="portfolio-overlay"><h3 data-i18n="proj1">E‑commerce</h3><a href="#" class="btn btn-sm" data-i18n="viewBtn">view</a></div></div>
-        <div class="portfolio-item"><img src="https://placehold.co/400x300/e74c3c/FFF?text=Dashboard"><div class="portfolio-overlay"><h3 data-i18n="proj2">Admin panel</h3><a href="#" class="btn btn-sm" data-i18n="viewBtn">view</a></div></div>
-        <div class="portfolio-item"><img src="https://placehold.co/400x300/27ae60/FFF?text=Travel+App"><div class="portfolio-overlay"><h3 data-i18n="proj3">Travel</h3><a href="#" class="btn btn-sm" data-i18n="viewBtn">view</a></div></div>
+        <div class="portfolio-item"><img src="https://placehold.co/400x300/2c3e50/FFF?text=AI+Platform"><div class="portfolio-overlay"><h3>AI Chat Platform</h3><a href="#" class="btn btn-sm">view</a></div></div>
+        <div class="portfolio-item"><img src="https://placehold.co/400x300/e74c3c/FFF?text=DevOps"><div class="portfolio-overlay"><h3>DevOps Dashboard</h3><a href="#" class="btn btn-sm">view</a></div></div>
+        <div class="portfolio-item"><img src="https://placehold.co/400x300/27ae60/FFF?text=E-Learning"><div class="portfolio-overlay"><h3>E-Learning</h3><a href="#" class="btn btn-sm">view</a></div></div>
+        <div class="portfolio-item"><img src="https://placehold.co/400x300/9b59b6/FFF?text=FinTech"><div class="portfolio-overlay"><h3>FinTech</h3><a href="#" class="btn btn-sm">view</a></div></div>
       </div>
     </div>
   </section>
 
-  <section id="dashboard" class="section" style="padding: 40px 0 60px;">
+  <section id="projects" class="section bg-light">
     <div class="container">
-      <h2 class="section-title reveal" data-i18n="dashboardTitle">📈 dashboard · insights</h2>
-      
-      <div class="system-status reveal" id="systemStatusBar">
-        <i class="fas fa-shield-alt" style="color: var(--primary); font-size: 1.6rem;"></i>
-        <span><strong data-i18n="sysStatus">system status:</strong> <span id="sysMessage" data-i18n="sysIdle">all secure · no active session</span></span>
-        <span class="status-badge" id="sysBadge" data-i18n="idleBadge">🔒 idle</span>
-        <span class="status-badge success blink" id="lastAction" style="margin-left:auto;" data-i18n="lastAction">last action: —</span>
-      </div>
-
-      <div class="dashboard-grid reveal">
-        <div class="dashboard-card">
-          <div style="display: flex; justify-content: space-between; align-items: center;">
-            <h3 style="font-weight: 600;"><i class="fas fa-chart-pie" style="color:var(--primary)"></i> <span data-i18n="contentOverview">Content overview</span></h3>
-            <span class="chip"><i class="far fa-calendar-alt"></i> <span data-i18n="last29">last 29 days</span></span>
-          </div>
-          <div class="stats-row">
-            <div class="stat-item"><span class="stat-value">184k</span> <div class="stat-label" data-i18n="views">views</div></div>
-            <div class="stat-item"><span class="stat-value">12.3k</span> <div class="stat-label" data-i18n="engagement">engagement</div></div>
-            <div class="stat-item"><span class="stat-value">+822</span> <div class="stat-label" data-i18n="netFollowers">net followers</div></div>
-          </div>
-          <div style="display: flex; gap: 30px; margin: 25px 0 10px; border-bottom: 2px solid #ecf1f6; padding-bottom: 12px;">
-            <span style="font-weight: 600;"><i class="fas fa-chart-line" style="color: var(--primary);"></i> <span data-i18n="insights">insights</span></span>
-            <span><i class="far fa-clock"></i> <span data-i18n="lastDay">last day: +8.2%</span></span>
-            <span><i class="far fa-eye"></i> <span data-i18n="trend29">29d trend +31%</span></span>
-          </div>
-          <h4 style="margin: 20px 0 12px;"><i class="fas fa-play-circle" style="color: var(--primary);"></i> <span data-i18n="topPlayed">top‑played reels</span></h4>
-          <div class="reel-list">
-            <div class="reel-item"><div class="reel-thumb"><i class="fas fa-film"></i></div><div class="reel-info">dark UI reel</div><div class="reel-stats"><span>230k plays</span><span>❤️ 4.1k</span></div></div>
-            <div class="reel-item"><div class="reel-thumb"><i class="fas fa-camera-retro"></i></div><div class="reel-info">code snippet</div><div class="reel-stats"><span>187k plays</span><span>❤️ 2.9k</span></div></div>
-            <div class="reel-item"><div class="reel-thumb"><i class="fas fa-palette"></i></div><div class="reel-info">figma to html</div><div class="reel-stats"><span>96k plays</span><span>❤️ 1.8k</span></div></div>
-          </div>
-          <div class="next-steps">
-            <span class="chip" onclick="systemAction('share top reel')"><i class="fas fa-rocket"></i> <span data-i18n="shareTop">share your top reel</span></span>
-            <span class="chip" onclick="systemAction('add to story')"><i class="fas fa-plus-circle"></i> <span data-i18n="addStory">add to story</span></span>
-            <span class="chip" onclick="systemAction('see all insights')"><i class="fas fa-chart-simple"></i> <span data-i18n="seeInsights">see all insights</span></span>
-          </div>
-          <button class="share-story" onclick="systemAction('share reel to story')"><i class="fab fa-instagram"></i> <span data-i18n="shareStory">share your reel to story</span></button>
-        </div>
-        <div class="dashboard-card">
-          <h3><i class="fas fa-user-astronaut"></i> <span data-i18n="yourReel">your reel</span></h3>
-          <div style="background: linear-gradient(130deg, #101b29, #1f3246); color: white; border-radius: 28px; padding: 22px; margin: 22px 0;">
-            <div style="display: flex; align-items: center; gap: 15px;">
-              <i class="fas fa-clapperboard fa-2x"></i>
-              <span style="font-weight: 600;" data-i18n="reelTitle">“CSS grid tricks”</span>
-            </div>
-            <div style="display: flex; justify-content: space-between; margin-top: 20px;">
-              <span><i class="far fa-eye"></i> 49k</span>
-              <span><i class="far fa-heart"></i> 2.1k</span>
-              <span><i class="far fa-comment"></i> 98</span>
-            </div>
-          </div>
-          <div style="display: flex; justify-content: space-between;" class="engagement-badge">
-            <span><i class="fas fa-arrow-up" style="color:#2ecc71;"></i> <span data-i18n="engPlus">engagement +9%</span></span>
-            <span><i class="fas fa-users"></i> <span data-i18n="netPlus">net +822</span></span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="auth" class="section bg-dark" style="scroll-margin-top: 20px;">
-    <div class="container">
-      <h2 class="section-title" style="color:white;" data-i18n="joinTitle">🔐 join community · secure</h2>
-      <div class="auth-grid">
-        <div id="login" class="card reveal">
-          <h3 data-i18n="login">Log In</h3>
-          <p style="margin-bottom: 20px;" data-i18n="welcomeBack">Welcome back, dev.</p>
-          <form id="loginForm" onsubmit="return fakeGoogleAuth(event, 'login')">
-            <div class="input-group"><input type="email" placeholder="Email" id="loginEmail" data-i18n-placeholder="emailPlace" required></div>
-            <div class="input-group password-wrapper">
-              <input type="password" placeholder="Password" id="loginPassword" required minlength="6" data-i18n-placeholder="passPlace">
-              <button type="button" class="toggle-pw" onclick="togglePassword('loginPassword',this)"><i class="far fa-eye-slash"></i></button>
-            </div>
-            <div class="validation-hint" id="loginHint"><i class="fas fa-info-circle"></i> <span data-i18n="min6">min 6 characters</span></div>
-            <button class="btn btn-block" style="margin-top: 8px;" type="submit"><i class="fab fa-google"></i>  <span data-i18n="loginGoogle">login with google</span></button>
-          </form>
-        </div>
-        <div id="signup" class="card reveal">
-          <h3 data-i18n="signup">Sign Up</h3>
-          <p style="margin-bottom: 20px;" data-i18n="createAcc">create account · min 6 chars</p>
-          <form id="signupForm" onsubmit="return fakeGoogleAuth(event, 'signup')">
-            <div class="input-group"><input type="text" placeholder="Full name" id="signupName" data-i18n-placeholder="namePlace" required></div>
-            <div class="input-group"><input type="email" placeholder="Email" id="signupEmail" data-i18n-placeholder="emailPlace" required></div>
-            <div class="input-group password-wrapper">
-              <input type="password" placeholder="Password" id="signupPassword" required minlength="6" oninput="checkPasswordStrength(this.value)" data-i18n-placeholder="passPlace">
-              <button type="button" class="toggle-pw" onclick="togglePassword('signupPassword',this)"><i class="far fa-eye-slash"></i></button>
-            </div>
-            <div class="validation-hint" id="signupHint"><i class="fas fa-circle"></i> <span data-i18n="min6Req">6+ characters required</span></div>
-            <button class="btn btn-outline btn-block" type="submit"><i class="fab fa-google"></i>  <span data-i18n="signupGoogle">sign up with google</span></button>
-          </form>
-        </div>
+      <h2 class="section-title reveal" data-i18n="liveProjectsTitle">🌐 Live Projects</h2>
+      <div class="portfolio-grid">
+        <div class="portfolio-item"><img src="https://placehold.co/600x400/2c3e50/FFF?text=Quran+Apps"><div class="portfolio-overlay"><a href="#" class="btn">Quran Bits</a><a href="#" class="btn">Quran JS</a></div></div>
+        <div class="portfolio-item"><img src="https://placehold.co/600x400/e74c3c/FFF?text=Interactive"><div class="portfolio-overlay"><a href="#" class="btn">4Commet</a><a href="#" class="btn">Maps</a></div></div>
+        <div class="portfolio-item"><img src="https://placehold.co/600x400/27ae60/FFF?text=Responsive"><div class="portfolio-overlay"><a href="#" class="btn">Full Responsive</a></div></div>
+        <div class="portfolio-item"><img src="https://placehold.co/600x400/9b59b6/FFF?text=Deployed"><div class="portfolio-overlay"><a href="#" class="btn">Noede</a><a href="#" class="btn">Push1p</a></div></div>
       </div>
     </div>
   </section>
 
   <section id="contact" class="section">
     <div class="container">
-      <h2 class="section-title reveal" data-i18n="contactTitle">get in touch · message manager</h2>
-      
-      <div class="card reveal" style="padding: 30px; margin-bottom: 30px;">
-        <form id="messageForm" onsubmit="return saveMessage(event)">
-          <div class="input-group">
-            <input type="text" id="msgName" data-i18n-placeholder="yourName" placeholder="Your name" required>
-          </div>
-          <div class="input-group">
-            <input type="email" id="msgEmail" data-i18n-placeholder="yourEmail" placeholder="Your email" required>
-          </div>
-          <div class="input-group">
-            <textarea id="msgText" rows="3" data-i18n-placeholder="yourMessage" placeholder="Your message" required></textarea>
-          </div>
-          <button type="submit" class="btn btn-block"><i class="fas fa-save"></i> <span data-i18n="saveMsg">save message</span></button>
+      <h2 class="section-title reveal" data-i18n="contactTitle">Get in Touch</h2>
+      <div class="contact-form reveal">
+        <form onsubmit="return sendMessage(event)">
+          <div class="input-group"><input type="text" id="name" placeholder="Your Name" required></div>
+          <div class="input-group"><input type="email" id="email" placeholder="Your Email" value="salimabdu759@gmail.com" required></div>
+          <div class="input-group"><textarea id="message" rows="4" placeholder="Your Message" required></textarea></div>
+          <button type="submit" class="btn btn-block"><i class="fas fa-paper-plane"></i> Send Message</button>
         </form>
-      </div>
-
-      <div class="message-manager reveal" id="messageManager">
-        <h3 style="margin-bottom: 18px;"><i class="fas fa-inbox"></i> <span data-i18n="yourMessages">your messages · full control</span></h3>
-        <div id="messageList"></div>
-        <p id="noMessages" style="text-align: center; color: #7f8c8d; padding: 20px;" data-i18n="noMessages">no saved messages yet. use the form above.</p>
       </div>
     </div>
   </section>
 
   <footer>
-    <p data-i18n="footer">© 2025 Abdu Salim · multilingual · full action success</p>
+    <div class="container"><div class="logo" style="color:white;">FAYCEL<span style="color:var(--primary);"> MOHAMED AHMED.</span></div><div class="footer-email"><i class="fas fa-envelope"></i> salimabdu759@gmail.com</div><p>© 2026 FAYCEL MOHAMED AHMED.</p></div>
   </footer>
 
-  <div id="toastContainer" style="position: fixed; top: 100px; right: 30px; z-index: 9999;"></div>
+  <div id="toastContainer" style="position:fixed; top:100px; right:30px; z-index:9999;"></div>
 
   <script>
-    // ---------- MULTILINGUAL TRANSLATIONS ----------
+    // ---- translations (minimal for demo) ----
     const translations = {
-      en: {
-        logo: "Abdu<span>Salim.</span>",
-        home: "Home", services: "Services", skills: "Skills", portfolio: "Portfolio", dashboard: "Dashboard", join: "Join",
-        signup: "Sign Up", login: "Log In", langBtn: "EN / عربي",
-        role: "Web Developer · UI/UX Designer",
-        greeting: "Building Digital <br><span>Experiences</span>",
-        heroDesc: "I turn coffee into code and ideas into interactive reality. 4+ years of front-end craft.",
-        hireMe: "Hire Me", myWork: "My Work",
-        servicesTitle: "My Services",
-        serv1Title: "Web Dev", serv1Desc: "Semantic HTML, modern CSS, vanilla JS, responsive.",
-        serv2Title: "UI/UX Design", serv2Desc: "Clean, user-friendly, pixel-perfect interfaces.",
-        serv3Title: "Optimization", serv3Desc: "Performance, SEO, and core web vitals.",
-        skillsTitle: "Technical skills",
-        techExpTitle: "Expertise", techExpDesc: "I constantly update my stack to match modern standards.",
-        recentWork: "Recent work",
-        proj1: "E‑commerce", proj2: "Admin panel", proj3: "Travel", viewBtn: "view",
-        dashboardTitle: "📈 dashboard · insights",
-        sysStatus: "system status:", sysIdle: "all secure · no active session", idleBadge: "🔒 idle", lastAction: "last action: —",
-        contentOverview: "Content overview", last29: "last 29 days", views: "views", engagement: "engagement", netFollowers: "net followers",
-        insights: "insights", lastDay: "last day: +8.2%", trend29: "29d trend +31%",
-        topPlayed: "top‑played reels", shareTop: "share your top reel", addStory: "add to story", seeInsights: "see all insights",
-        shareStory: "share your reel to story", yourReel: "your reel", reelTitle: "“CSS grid tricks”",
-        engPlus: "engagement +9%", netPlus: "net +822",
-        joinTitle: "🔐 join community · secure",
-        welcomeBack: "Welcome back, dev.", createAcc: "create account · min 6 chars",
-        emailPlace: "Email", passPlace: "Password", namePlace: "Full name",
-        min6: "min 6 characters", min6Req: "6+ characters required",
-        loginGoogle: "login with google", signupGoogle: "sign up with google",
-        contactTitle: "get in touch · message manager",
-        yourName: "Your name", yourEmail: "Your email", yourMessage: "Your message",
-        saveMsg: "save message", yourMessages: "your messages · full control", noMessages: "no saved messages yet. use the form above.",
-        footer: "© 2025 Abdu Salim · multilingual · full action success"
-      },
-      ar: {
-        logo: "عبدو<span>سليم.</span>",
-        home: "الرئيسية", services: "الخدمات", skills: "المهارات", portfolio: "الأعمال", dashboard: "لوحة القيادة", join: "انضم",
-        signup: "إنشاء حساب", login: "تسجيل الدخول", langBtn: "EN / عربي",
-        role: "مطور ويب · مصمم واجهات",
-        greeting: "بناء تجارب <br><span>رقمية</span>",
-        heroDesc: "أحول القهوة إلى أكواد والأفكار إلى واقع تفاعلي. أكثر من 4 سنوات من خبرة الواجهات الأمامية.",
-        hireMe: "وظفني", myWork: "أعمالي",
-        servicesTitle: "خدماتي",
-        serv1Title: "تطوير ويب", serv1Desc: "HTML دلالي، CSS حديث، JavaScript خالص، متجاوب.",
-        serv2Title: "تصميم UI/UX", serv2Desc: "واجهات نظيفة وسهلة الاستخدام ومثالية البكسلات.",
-        serv3Title: "تحسين الأداء", serv3Desc: "أداء، تحسين محركات البحث ومؤشرات الويب الأساسية.",
-        skillsTitle: "المهارات التقنية",
-        techExpTitle: "الخبرة", techExpDesc: "أحدث مهاراتي باستمرار لتواكب المعايير الحديثة.",
-        recentWork: "أحدث الأعمال",
-        proj1: "تجارة إلكترونية", proj2: "لوحة تحكم", proj3: "سفر", viewBtn: "عرض",
-        dashboardTitle: "📈 لوحة القيادة · insights",
-        sysStatus: "حالة النظام:", sysIdle: "آمن · لا توجد جلسة نشطة", idleBadge: "🔒 خامل", lastAction: "آخر حدث: —",
-        contentOverview: "نظرة عامة على المحتوى", last29: "آخر 29 يومًا", views: "مشاهدات", engagement: "تفاعل", netFollowers: "متابعين صافٍ",
-        insights: "تحليلات", lastDay: "آخر يوم: +8.2%", trend29: "اتجاه 29 يوم +31%",
-        topPlayed: "أكثر الـ reels تشغيلاً", shareTop: "شارك أفضل reel", addStory: "أضف للقصة", seeInsights: "عرض كل التحليلات",
-        shareStory: "شارك الـ reel في قصتك", yourReel: "الـ reel الخاص بك", reelTitle: "“حيل CSS grid”",
-        engPlus: "التفاعل +9%", netPlus: "صافي +822",
-        joinTitle: "🔐 انضم للمجتمع · آمن",
-        welcomeBack: "مرحباً بعودتك أيها المطور.", createAcc: "أنشئ حساب · 6 أحرف كحد أدنى",
-        emailPlace: "البريد الإلكتروني", passPlace: "كلمة المرور", namePlace: "الاسم الكامل",
-        min6: "6 أحرف كحد أدنى", min6Req: "6+ أحرف مطلوبة",
-        loginGoogle: "تسجيل الدخول باستخدام جوجل", signupGoogle: "إنشاء حساب باستخدام جوجل",
-        contactTitle: "تواصل · إدارة الرسائل",
-        yourName: "اسمك", yourEmail: "بريدك", yourMessage: "رسالتك",
-        saveMsg: "حفظ الرسالة", yourMessages: "رسائلك · تحكم كامل", noMessages: "لا توجد رسائل محفوظة بعد. استخدم النموذج أعلاه.",
-        footer: "© 2025 عبدو سليم · متعدد اللغات · نجاح الإجراء الكامل"
-      }
+      en: { logo:"FAYCEL MOHAMED AHMED.", home:"Home", engineering:"Engineering", languages:"Languages", skills:"Skills", portfolio:"Portfolio", projects:"Projects", contact:"Contact", role:"Hi name is FAYCEL MOHAMED AHMED", greeting:"l,m Engineer", heroDesc:"I turn coffee into code...", hireMe:"Hire Me", myWork:"View Work", engineeringTitle:"🔧 Software Engineering Specializations", langTitle:"💬 Languages I Speak", skillsTitle:"Engineering Skills", recentWork:"Engineering Portfolio", liveProjectsTitle:"🌐 Live Projects", contactTitle:"Get in Touch", techExpTitle:"Core Expertise", techExpDesc:"Specialized in multiple engineering domains." },
+      nl: { logo:"FAYCEL MOHAMED AHMED.", home:"Home", engineering:"Techniek", languages:"Talen", skills:"Vaardigheden", portfolio:"Portfolio", projects:"Projecten", contact:"Contact", role:"Ik ben FAYCEL MOHAMED AHMED", greeting:"Ingenieur", heroDesc:"Ik verander koffie in code...", hireMe:"Huur mij in", myWork:"Bekijk werk", engineeringTitle:"🔧 Software Engineering Specialisaties", langTitle:"💬 Talen die ik spreek", skillsTitle:"Technische vaardigheden", recentWork:"Technisch portfolio", liveProjectsTitle:"🌐 Live projecten", contactTitle:"Neem contact op", techExpTitle:"Kern expertise", techExpDesc:"Gespecialiseerd in meerdere technische domeinen." },
+      ar: { logo:"فيصل محمد أحمد.", home:"الرئيسية", engineering:"الهندسة", languages:"اللغات", skills:"المهارات", portfolio:"الأعمال", projects:"المشاريع", contact:"اتصل", role:"مرحبا أنا فيصل محمد أحمد", greeting:"مهندس", heroDesc:"أحول القهوة إلى كود...", hireMe:"وظفني", myWork:"أعمالي", engineeringTitle:"🔧 تخصصات هندسة البرمجيات", langTitle:"💬 اللغات التي أتحدثها", skillsTitle:"المهارات الهندسية", recentWork:"أعمال هندسية", liveProjectsTitle:"🌐 مشاريع حية", contactTitle:"تواصل معي", techExpTitle:"الخبرات الأساسية", techExpDesc:"متخصص في مجالات هندسية متعددة." }
     };
-
     let currentLang = 'en';
-
     function translatePage() {
-      const elements = document.querySelectorAll('[data-i18n]');
-      elements.forEach(el => {
-        const key = el.getAttribute('data-i18n');
-        if (translations[currentLang][key]) {
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.dataset.i18n;
+        if (translations[currentLang] && translations[currentLang][key]) {
           if (key === 'logo') el.innerHTML = translations[currentLang][key];
           else el.innerText = translations[currentLang][key];
         }
       });
-      const placeholders = document.querySelectorAll('[data-i18n-placeholder]');
-      placeholders.forEach(el => {
-        const key = el.getAttribute('data-i18n-placeholder');
-        if (translations[currentLang][key]) el.placeholder = translations[currentLang][key];
-      });
-      document.documentElement.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
+      document.getElementById('currentLang').innerText = currentLang==='en'?'English':currentLang==='nl'?'Nederlands':'العربية';
+      document.documentElement.dir = currentLang==='ar'?'rtl':'ltr';
       document.documentElement.lang = currentLang;
     }
-
-    function toggleLanguage() {
-      currentLang = currentLang === 'en' ? 'ar' : 'en';
+    window.toggleLanguage = function() { 
+      const langs = ['en','nl','ar'];
+      currentLang = langs[(langs.indexOf(currentLang)+1)%langs.length];
       translatePage();
-      showToast(`🌐 ${currentLang === 'en' ? 'English' : 'العربية'}`, false);
-    }
+      showToast(`Language: ${currentLang}`, false);
+    };
 
-    // ---------- MESSAGE MANAGEMENT ----------
-    let messages = JSON.parse(localStorage.getItem('contactMessages')) || [];
-
-    function renderMessages() {
-      const listDiv = document.getElementById('messageList');
-      const noMsg = document.getElementById('noMessages');
-      if (!listDiv) return;
-      if (messages.length === 0) {
-        listDiv.innerHTML = '';
-        noMsg.style.display = 'block';
-        return;
+    // ---- mobile menu ----
+    const hamburger = document.getElementById('hamburgerBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    hamburger.addEventListener('click', (e) => {
+      e.stopPropagation();
+      mobileMenu.classList.toggle('show');
+    });
+    window.closeMobileMenu = function() { mobileMenu.classList.remove('show'); };
+    // close if click outside (optional)
+    document.addEventListener('click', (e) => {
+      if (!hamburger.contains(e.target) && !mobileMenu.contains(e.target)) {
+        mobileMenu.classList.remove('show');
       }
-      noMsg.style.display = 'none';
-      let html = '';
-      messages.forEach((msg, index) => {
-        html += `<div class="message-item" data-index="${index}">
-          <div class="message-content">
-            <div class="message-name">${escapeHtml(msg.name)} · ${escapeHtml(msg.email)}</div>
-            <div class="message-text">${escapeHtml(msg.text)}</div>
-          </div>
-          <div class="message-actions">
-            <button class="save-btn" onclick="copyAndSaveMessage(${index})" title="${currentLang === 'en' ? 'save copy' : 'حفظ نسخة'}"><i class="fas fa-copy"></i></button>
-            <button class="delete-btn" onclick="deleteMessage(${index})" title="${currentLang === 'en' ? 'delete' : 'حذف'}"><i class="fas fa-trash"></i></button>
-          </div>
-        </div>`;
-      });
-      listDiv.innerHTML = html;
-    }
+    });
 
-    function escapeHtml(unsafe) {
-      return unsafe.replace(/[&<>"]/g, function(m) {
-        if(m === '&') return '&amp;'; if(m === '<') return '&lt;'; if(m === '>') return '&gt;'; if(m === '"') return '&quot;';
-        return m;
-      });
-    }
-
-    function saveMessage(e) {
-      e.preventDefault();
-      const name = document.getElementById('msgName').value.trim();
-      const email = document.getElementById('msgEmail').value.trim();
-      const text = document.getElementById('msgText').value.trim();
-      if (!name || !email || !text) {
-        showToast(currentLang === 'en' ? '⚠️ all fields required' : '⚠️ جميع الحقول مطلوبة', false);
-        return false;
-      }
-      const newMsg = { name, email, text, date: new Date().toLocaleString() };
-      messages.push(newMsg);
-      localStorage.setItem('contactMessages', JSON.stringify(messages));
-      renderMessages();
-      document.getElementById('messageForm').reset();
-      showToast(currentLang === 'en' ? '✅ message saved successfully' : '✅ تم حفظ الرسالة بنجاح');
-      systemAction(currentLang === 'en' ? 'message saved' : 'تم حفظ الرسالة');
-      return false;
-    }
-
-    function deleteMessage(index) {
-      if (index >= 0 && index < messages.length) {
-        const deleted = messages.splice(index, 1);
-        localStorage.setItem('contactMessages', JSON.stringify(messages));
-        renderMessages();
-        showToast(`${currentLang === 'en' ? '🗑️ message from' : '🗑️ رسالة من'} ${deleted[0].name} ${currentLang === 'en' ? 'deleted' : 'محذوفة'}`);
-        systemAction(currentLang === 'en' ? 'message deleted' : 'تم حذف الرسالة');
-      }
-    }
-
-    function copyAndSaveMessage(index) {
-      if (index >= 0 && index < messages.length) {
-        const orig = messages[index];
-        const newMsg = { ...orig, name: orig.name + (currentLang === 'en' ? ' (copy)' : ' (نسخة)'), date: new Date().toLocaleString() };
-        messages.push(newMsg);
-        localStorage.setItem('contactMessages', JSON.stringify(messages));
-        renderMessages();
-        showToast(currentLang === 'en' ? '📋 message duplicated' : '📋 تم نسخ الرسالة');
-        systemAction(currentLang === 'en' ? 'message duplicated' : 'تم نسخ الرسالة');
-      }
-    }
-
-    // ---------- TOAST ----------
-    function showToast(message, isSuccess = true) {
-      const container = document.getElementById('toastContainer');
-      const toast = document.createElement('div');
-      toast.className = 'success-toast';
-      toast.innerHTML = `<i class="fas ${isSuccess ? 'fa-check-circle' : 'fa-info-circle'}"></i>
-                        <div class="msg">${message}</div>`;
-      container.appendChild(toast);
-      setTimeout(() => { if (toast.parentNode) toast.remove(); }, 3500);
-    }
-
-    // ---------- AUTH / SYSTEM ----------
-    function togglePassword(fieldId, btn) {
-      const pwInput = document.getElementById(fieldId);
-      const icon = btn.querySelector('i');
-      if (pwInput.type === 'password') {
-        pwInput.type = 'text';
-        icon.classList.remove('fa-eye-slash'); icon.classList.add('fa-eye');
-      } else {
-        pwInput.type = 'password';
-        icon.classList.remove('fa-eye'); icon.classList.add('fa-eye-slash');
-      }
-    }
-
-    function checkPasswordStrength(val) {
-      const hint = document.getElementById('signupHint');
-      if (val.length >= 6) {
-        hint.innerHTML = `<i class="fas fa-check-circle valid-ok"></i> ${currentLang === 'en' ? 'strong enough (min 6)' : 'قوية كافية (6 أحرف)'}`;
-        hint.style.color = '#2ecc71';
-      } else {
-        hint.innerHTML = `<i class="fas fa-exclamation-circle invalid"></i> ${currentLang === 'en' ? 'minimum 6 characters' : '6 أحرف على الأقل'}`;
-        hint.style.color = '#e74c3c';
-      }
-    }
-
-    function updateSystemStatus(action, email = '') {
-      const sysMsg = document.getElementById('sysMessage');
-      const sysBadge = document.getElementById('sysBadge');
-      const lastAction = document.getElementById('lastAction');
-      sysMsg.innerText = currentLang === 'en' ? `authenticated · ${action} successful` : `مُصادق · ${action === 'login' ? 'تسجيل دخول' : 'إنشاء حساب'} ناجح`;
-      sysBadge.innerHTML = '✅ active session';
-      sysBadge.classList.add('success');
-      lastAction.innerHTML = `${currentLang === 'en' ? 'last action:' : 'آخر حدث:'} ${action} ${email ? '· '+email : ''}`;
-    }
-
-    function systemAction(action) {
-      showToast(`⚡ ${currentLang === 'en' ? 'action:' : 'حدث:'} ${action}`, false);
-      const lastAction = document.getElementById('lastAction');
-      if (lastAction) lastAction.innerHTML = `${currentLang === 'en' ? 'last action:' : 'آخر حدث:'} ${action} · ${currentLang === 'en' ? 'just now' : 'الآن'}`;
-    }
-
-    function fakeGoogleAuth(e, type) {
-      e.preventDefault();
-      let passwordField = type === 'login' ? document.getElementById('loginPassword') : document.getElementById('signupPassword');
-      let hintDiv = type === 'login' ? document.getElementById('loginHint') : document.getElementById('signupHint');
-      let emailField = type === 'login' ? document.getElementById('loginEmail') : document.getElementById('signupEmail');
-      
-      if (!passwordField.value || passwordField.value.length < 6) {
-        hintDiv.innerHTML = `<i class="fas fa-times-circle invalid"></i> ${currentLang === 'en' ? 'password must be ≥6 characters' : 'كلمة المرور يجب أن تكون 6 أحرف على الأقل'}`;
-        hintDiv.style.color = '#e74c3c';
-        return false;
-      }
-
-      const btn = e.target.querySelector('button[type="submit"]');
-      const original = btn.innerHTML;
-      btn.innerHTML = '<i class="fas fa-spinner fa-pulse"></i> ' + (currentLang === 'en' ? 'connecting...' : 'جاري الاتصال...');
-      btn.disabled = true;
-
-      setTimeout(() => {
-        const actionText = type === 'login' ? (currentLang === 'en' ? 'login' : 'تسجيل دخول') : (currentLang === 'en' ? 'signup' : 'إنشاء حساب');
-        const email = emailField.value.split('@')[0] || 'user';
-        showToast(`✅ ${actionText} ${currentLang === 'en' ? 'successful · welcome' : 'ناجح · مرحباً'} ${email}`);
-        updateSystemStatus(type, emailField.value);
-        btn.innerHTML = original;
-        btn.disabled = false;
-        if (type === 'signup') {
-          document.getElementById('signupHint').innerHTML = `<i class="fas fa-circle"></i> ${currentLang === 'en' ? '6+ characters required' : '6+ أحرف مطلوبة'}`;
-        } else {
-          document.getElementById('loginHint').innerHTML = `<i class="fas fa-info-circle"></i> ${currentLang === 'en' ? 'min 6 characters' : '6 أحرف كحد أدنى'}`;
-        }
-        passwordField.value = '';
-      }, 1200);
-      return false;
-    }
-
-    // ---------- SCROLL REVEAL ----------
+    // ---- reveal + skill bars ----
     window.addEventListener('scroll', function() {
-      let reveals = document.querySelectorAll('.reveal');
-      for (let i = 0; i < reveals.length; i++) {
-        let windowHeight = window.innerHeight;
-        let top = reveals[i].getBoundingClientRect().top;
-        if (top < windowHeight - 100) reveals[i].classList.add('active');
-      }
+      document.querySelectorAll('.reveal').forEach(el => {
+        if (el.getBoundingClientRect().top < window.innerHeight - 100) el.classList.add('active');
+      });
       document.querySelectorAll('.skill-fill').forEach(bar => {
-        let rect = bar.closest('.skills-right')?.getBoundingClientRect();
-        if (rect && rect.top < window.innerHeight - 80) {
+        if (bar.closest('.skills-right')?.getBoundingClientRect().top < window.innerHeight - 80) {
           bar.style.width = bar.getAttribute('data-width') || '85%';
         }
       });
     }); window.dispatchEvent(new Event('scroll'));
 
-    document.querySelector('.hamburger').addEventListener('click', function() {
-      showToast(currentLang === 'en' ? '🍔 menu (demo)' : '🍔 القائمة (تجريبي)', false);
-    });
+    // ---- toast & form ----
+    function showToast(msg, isSuccess=true) {
+      const toast = document.createElement('div'); toast.className = 'success-toast';
+      toast.innerHTML = `<i class="fas ${isSuccess?'fa-check-circle':'fa-info-circle'}"></i><div>${msg}</div>`;
+      document.getElementById('toastContainer').appendChild(toast);
+      setTimeout(() => toast.remove(), 3000);
+    }
+    window.sendMessage = function(e) { e.preventDefault(); showToast('✅ Message sent!'); document.getElementById('name').value=''; document.getElementById('message').value=''; return false; };
 
-    // initial render & language
-    renderMessages();
+    // initial translation
     translatePage();
   </script>
-  <style>
-    .fa-check-circle { color: #2ecc71; }
-    .fa-exclamation-circle, .fa-times-circle { color: #e74c3c; }
-    .toggle-pw { background: none; border: none; font-size: 1.2rem; }
-    .dashboard-card h3 i { color: var(--primary); margin-right: 6px; }
-    .system-status { transition: 0.2s; }
-    html[dir="rtl"] .chip i { margin-left: 6px; margin-right: 0; }
-  </style>
 </body>
 </html>
